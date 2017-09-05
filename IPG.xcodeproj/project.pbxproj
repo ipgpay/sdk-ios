@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		682410A51F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682410A41F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift */; };
+		682410A71F5E4B2A00A5A610 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682410A61F5E4B2A00A5A610 /* ErrorCode.swift */; };
+		682410A91F5E91EF00A5A610 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682410A81F5E91EF00A5A610 /* Regex.swift */; };
 		68857E1E1F5D1DDA002E1647 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68857E1D1F5D1DDA002E1647 /* AppDelegate.swift */; };
 		68857E201F5D1DDA002E1647 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68857E1F1F5D1DDA002E1647 /* ViewController.swift */; };
 		68857E231F5D1DDA002E1647 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68857E211F5D1DDA002E1647 /* Main.storyboard */; };
@@ -51,6 +54,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		682410A41F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeTokenGenerator.swift; sourceTree = "<group>"; };
+		682410A61F5E4B2A00A5A610 /* ErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
+		682410A81F5E91EF00A5A610 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		68857E0C1F5D1D5C002E1647 /* IPG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IPG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68857E101F5D1D5C002E1647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68857E1B1F5D1DDA002E1647 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +123,9 @@
 				68857E101F5D1D5C002E1647 /* Info.plist */,
 				68857E341F5D1FA1002E1647 /* test.swift */,
 				68857E8E1F5D492A002E1647 /* TestResponse.swift */,
+				682410A41F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift */,
+				682410A61F5E4B2A00A5A610 /* ErrorCode.swift */,
+				682410A81F5E91EF00A5A610 /* Regex.swift */,
 			);
 			path = IPG;
 			sourceTree = "<group>";
@@ -308,7 +317,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				68857E8F1F5D492A002E1647 /* TestResponse.swift in Sources */,
+				682410A91F5E91EF00A5A610 /* Regex.swift in Sources */,
 				68857E351F5D1FA1002E1647 /* test.swift in Sources */,
+				682410A51F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift in Sources */,
+				682410A71F5E4B2A00A5A610 /* ErrorCode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

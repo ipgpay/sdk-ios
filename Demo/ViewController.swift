@@ -16,9 +16,15 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-    let test = IPG.Test();
-    _label.text = test.getString();
-    test.doIt()
+    
+    let ott = OneTimeTokenGenerator()
+    
+    let result = ott.isValidExpiryDate(expYear: "17", expMonth: "09")
+    
+    if result {
+     debugPrint("date is valid")
+    }
+    
   }
 
   override func didReceiveMemoryWarning() {
