@@ -19,10 +19,12 @@ class ViewController: UIViewController {
     
     let ott = OneTimeTokenGenerator()
     
-    let result = ott.isValidExpiryDate(expYear: "17", expMonth: "09")
+    let result = ott.isValidExpiryDate("17", "8")
     
     if result {
      debugPrint("date is valid")
+    } else {
+      debugPrint("date is invalid")
     }
     
   }

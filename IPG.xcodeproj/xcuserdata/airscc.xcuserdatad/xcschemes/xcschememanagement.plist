@@ -7,16 +7,26 @@
 		<key>Demo.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<key>IPG.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>IPGTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>6826A06B1F5FCEE7006ECFC1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>68857E0B1F5D1D5C002E1647</key>
 		<dict>
 			<key>primary</key>

@@ -17,7 +17,7 @@ class Regex {
       return results.count > 0
     }
     catch let error {
-      print("invalid regex: \(error.localizedDescription)")
+      debugPrint("invalid regex: \(error.localizedDescription)")
       return false
     }
   }

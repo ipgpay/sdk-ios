@@ -16,6 +16,10 @@ public class Test{
     
   }
   
+  public func getNumber() -> Int {
+    return 2
+  }
+  
   public func doIt() {
     Alamofire.request("https://httpbin.org/get", parameters:["foo": "bar"])
       .responseObject { (response: DataResponse<TestResponse>) in
