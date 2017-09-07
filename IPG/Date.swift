@@ -52,4 +52,8 @@ extension Date {
     return day
   }
   
+  static func timezoneOffset() -> Int {
+    return -TimeZone.current.secondsFromGMT() / 60
+  }
+  
 }

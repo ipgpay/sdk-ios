@@ -17,16 +17,15 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
-    let ott = OneTimeTokenGenerator()
+    let ott: OneTimeTokenGenerator = OneTimeTokenGenerator("testkey","http://private-ed273e-ipg.apiary-mock.com/token")
     
-    let result = ott.isValidExpiryDate("17", "8")
+    let options = Options(ccPan: "4012888888881881", ccCvv: "318", ccExpyear: "19", ccExpmonth: "09")
     
-    if result {
-     debugPrint("date is valid")
-    } else {
-      debugPrint("date is invalid")
+    ott.getPayload(options) { payload in
+      let str = "111"
+      debugPrint(str)
     }
-    
+ 
   }
 
   override func didReceiveMemoryWarning() {

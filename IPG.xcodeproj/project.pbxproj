@@ -18,7 +18,6 @@
 		68857E231F5D1DDA002E1647 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68857E211F5D1DDA002E1647 /* Main.storyboard */; };
 		68857E251F5D1DDA002E1647 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68857E241F5D1DDA002E1647 /* Assets.xcassets */; };
 		68857E281F5D1DDA002E1647 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68857E261F5D1DDA002E1647 /* LaunchScreen.storyboard */; };
-		68857E351F5D1FA1002E1647 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68857E341F5D1FA1002E1647 /* test.swift */; };
 		68857E381F5D23D0002E1647 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E2D1F5D1EFC002E1647 /* Alamofire.framework */; };
 		68857E471F5D3D9D002E1647 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E451F5D3D9D002E1647 /* AlamofireObjectMapper.framework */; };
 		68857E481F5D3D9D002E1647 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E461F5D3D9D002E1647 /* ObjectMapper.framework */; };
@@ -26,7 +25,7 @@
 		68857E861F5D451C002E1647 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E2D1F5D1EFC002E1647 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		68857E881F5D452D002E1647 /* AlamofireObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E451F5D3D9D002E1647 /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		68857E8A1F5D452D002E1647 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E461F5D3D9D002E1647 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		68857E8F1F5D492A002E1647 /* TestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68857E8E1F5D492A002E1647 /* TestResponse.swift */; };
+		68F099A21F612A3A000170A0 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F099A11F612A3A000170A0 /* TokenResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,11 +87,10 @@
 		68857E271F5D1DDA002E1647 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68857E291F5D1DDA002E1647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68857E2D1F5D1EFC002E1647 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/IPG-abvlyebgidrcjzfnzbrzyalwhyop/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
-		68857E341F5D1FA1002E1647 /* test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		68857E451F5D3D9D002E1647 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = "../../../Library/Developer/Xcode/DerivedData/IPG-abvlyebgidrcjzfnzbrzyalwhyop/Build/Products/Debug-iphonesimulator/AlamofireObjectMapper/AlamofireObjectMapper.framework"; sourceTree = "<group>"; };
 		68857E461F5D3D9D002E1647 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "../../../Library/Developer/Xcode/DerivedData/IPG-abvlyebgidrcjzfnzbrzyalwhyop/Build/Products/Debug-iphonesimulator/ObjectMapper/ObjectMapper.framework"; sourceTree = "<group>"; };
 		68857E8B1F5D4548002E1647 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		68857E8E1F5D492A002E1647 /* TestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResponse.swift; sourceTree = "<group>"; };
+		68F099A11F612A3A000170A0 /* TokenResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		E105D02E255FE7148F669E20 /* Pods-IPG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPG.release.xcconfig"; path = "Pods/Target Support Files/Pods-IPG/Pods-IPG.release.xcconfig"; sourceTree = "<group>"; };
 		EEA2A645892DD04C61759857 /* Pods-IPG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPG.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IPG/Pods-IPG.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,12 +159,11 @@
 			isa = PBXGroup;
 			children = (
 				68857E101F5D1D5C002E1647 /* Info.plist */,
-				68857E341F5D1FA1002E1647 /* test.swift */,
-				68857E8E1F5D492A002E1647 /* TestResponse.swift */,
 				682410A41F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift */,
 				682410A61F5E4B2A00A5A610 /* ErrorCode.swift */,
 				682410A81F5E91EF00A5A610 /* Regex.swift */,
 				6826A0661F5F8930006ECFC1 /* Date.swift */,
+				68F099A11F612A3A000170A0 /* TokenResponse.swift */,
 			);
 			path = IPG;
 			sourceTree = "<group>";
@@ -397,10 +394,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68857E8F1F5D492A002E1647 /* TestResponse.swift in Sources */,
 				6826A0671F5F8930006ECFC1 /* Date.swift in Sources */,
+				68F099A21F612A3A000170A0 /* TokenResponse.swift in Sources */,
 				682410A91F5E91EF00A5A610 /* Regex.swift in Sources */,
-				68857E351F5D1FA1002E1647 /* test.swift in Sources */,
 				682410A51F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift in Sources */,
 				682410A71F5E4B2A00A5A610 /* ErrorCode.swift in Sources */,
 			);
@@ -669,6 +665,7 @@
 				6826A0761F5FCEE7006ECFC1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		68857E061F5D1D5C002E1647 /* Build configuration list for PBXProject "IPG" */ = {
 			isa = XCConfigurationList;

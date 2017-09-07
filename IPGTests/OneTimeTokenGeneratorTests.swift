@@ -11,7 +11,7 @@ import IPG
 
 class OneTimeTokenGeneratorTests: XCTestCase {
   
-  var ott: OneTimeTokenGenerator = OneTimeTokenGenerator()
+  var ott: OneTimeTokenGenerator = OneTimeTokenGenerator("testkey","http://private-ed273e-ipg.apiary-mock.com/token")
   
   override func setUp() {
     super.setUp()
@@ -22,9 +22,10 @@ class OneTimeTokenGeneratorTests: XCTestCase {
   }
   
   func testisValidExpiryDate() {
-    XCTAssert(ott.isValidExpiryDate("9999","8") == true)
     XCTAssert(ott.isValidExpiryDate("17","11") == true)
+    XCTAssert(ott.isValidExpiryDate("99","01") == true)
     
+    XCTAssert(ott.isValidExpiryDate("9999","12") == false)
     XCTAssert(ott.isValidExpiryDate("2017","08") == false)
     XCTAssert(ott.isValidExpiryDate("ab","c") == false)
     XCTAssert(ott.isValidExpiryDate("abcde","8") == false)
