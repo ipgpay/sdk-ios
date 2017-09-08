@@ -12,7 +12,7 @@ import ObjectMapper
 class TokenResponse: Mappable {
   
   var token: String?
-  var errors: [ErrorResponse]?
+  var errors: [OttError]?
   
   required init? (map: Map) {
     
@@ -24,18 +24,36 @@ class TokenResponse: Mappable {
   }
 }
 
-class ErrorResponse: Mappable {
+class OttError: OttErrorProtocol, Mappable {
   
-  var errorCode: String?
+  var errorCode: Int?
   var errorMessage: String?
   
   required init? (map: Map) {
     
   }
   
+  init(_ errorCode: Int, _ errorMessage: String) {
+    self.errorCode = errorCode
+    self.errorMessage = errorMessage
+  }
+  
   func mapping(map: Map) {
-    errorCode <- map["errorCode"]
+    
+    let transform = TransformOf<Int, String>(fromJSON: { (value: String?) -> Int? in
+      return Int(value!)
+    }, toJSON: { (value: Int?) -> String? in
+      if let value = value {
+        return String(value)
+      }
+      return nil
+    })
+    
     errorMessage <- map["errorMessage"]
+    errorCode <- map["errorCode"]
+    if errorCode == nil {
+      errorCode <- (map["errorCode"], transform)
+    }
   }
 }
 

@@ -18,3 +18,8 @@ enum ErrorCode: Int , Error {
   case commsServerUnreachable = 64
   case commsUnexpectedResponse = 128
 }
+
+public protocol OttErrorProtocol {
+  var errorCode: Int? { get set }
+  var errorMessage: String? { get set }
+}

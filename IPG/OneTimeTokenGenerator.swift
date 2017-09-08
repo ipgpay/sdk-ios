@@ -12,55 +12,19 @@ import AlamofireObjectMapper
 
 public protocol OneTimeTokenGeneratorProtocol {
   
-}
-
-public protocol OptionsProtocol {
-  var ccPan: String { get }
-  var ccCvv: String { get }
-  var ccExpyear: String { get }
-  var ccExpmonth: String { get }
-}
-
-public struct Options: OptionsProtocol {
-  
-  public init(ccPan: String, ccCvv: String, ccExpyear: String, ccExpmonth: String) {
-    self.ccPan = ccPan
-    self.ccCvv = ccCvv
-    self.ccExpyear = ccExpyear
-    self.ccExpmonth = ccExpmonth
-  }
-  
-  public var ccPan: String
-  public var ccCvv: String
-  public var ccExpyear: String
-  public var ccExpmonth: String
-}
-
-public protocol PayloadProtocol {
-  
-  var payload: String? { get }
-  var ccPanBin: String? { get }
-  var ccPanLast4: String? { get }
-  var error: [Int: String]? { get }
+  func getPayload(_ options: OptionsProtocol, _ responseHandler: @escaping (PayloadProtocol) -> Void)
   
 }
 
-public struct PaddedData {
-  public var cc_cvv: String
-  public var cc_expmonth: String
-  public var cc_expyear: String
-  public var cc_pan_remainder: String
+struct PaddedData {
+  var cc_cvv: String
+  var cc_expmonth: String
+  var cc_expyear: String
+  var cc_pan_remainder: String
   
-  public var pad: String
-  public var cc_pan_bin: String
-  public var cc_pan_last4: String
-}
-
-public struct Payload: PayloadProtocol {
-  public var payload: String?
-  public var ccPanBin: String?
-  public var ccPanLast4: String?
-  public var error: [Int: String]?
+  var pad: String
+  var cc_pan_bin: String
+  var cc_pan_last4: String
 }
 
 public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
@@ -83,7 +47,7 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     return regex.test(for: "^[0-9]{3,4}$", in: cvvNum)
   }
   
-  public func isValidExpiryDate(_ expYear: String, _ expMonth: String) -> Bool {
+  func isValidExpiryDate(_ expYear: String, _ expMonth: String) -> Bool {
     let regex = Regex()
     if expYear.isEmpty || !regex.test(for: "^[0-9]{2}$", in: expYear) {
       return false
@@ -100,7 +64,7 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     return today < expDate
   }
   
-  public func isValidLuhn(_ input: String) -> Bool {
+  func isValidLuhn(_ input: String) -> Bool {
     var sum = 0
     let numdigits = input.characters.count
     let parity = numdigits % 2
@@ -135,7 +99,7 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     return (pad: pad, val: newVal)
   }
   
-  public func validateData(_ options: OptionsProtocol) -> Int {
+  func validateData(_ options: OptionsProtocol) -> Int {
     var retCode = 0;
     
     if options.ccPan.isEmpty || !isValidLuhn(options.ccPan) {
@@ -151,7 +115,7 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     return retCode
   }
   
-  public func formatData(_ options: OptionsProtocol) -> OptionsProtocol {
+  func formatData(_ options: OptionsProtocol) -> OptionsProtocol {
     
     let ccPan = options.ccPan.trimmingCharacters(in: .whitespacesAndNewlines)
     let ccCvv =  options.ccCvv.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -161,32 +125,32 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     return Options(ccPan: ccPan, ccCvv: ccCvv, ccExpyear: ccExpyear, ccExpmonth: ccExpmonth)
   }
   
-  func generateErrors(_ retCode: Int) -> [Int: String] {
-    var errors = [Int: String]()
+  func generateErrors(_ retCode: Int) -> [OttErrorProtocol] {
+    var errors = [OttErrorProtocol]()
     
     if (retCode & ErrorCode.invalidCreditCardNumber.rawValue) == ErrorCode.invalidCreditCardNumber.rawValue {
-      errors[ErrorCode.invalidCreditCardNumber.rawValue] = "Credit card number is invalid."
+      errors.append(OttError(ErrorCode.invalidCreditCardNumber.rawValue, "Credit card number is invalid."))
     }
     if (retCode & ErrorCode.invalidCVV.rawValue) == ErrorCode.invalidCVV.rawValue {
-      errors[ErrorCode.invalidCVV.rawValue] = "CVV is invalid."
+      errors.append(OttError(ErrorCode.invalidCVV.rawValue, "CVV is invalid."))
     }
     if (retCode & ErrorCode.invalidExpiryDate.rawValue) == ErrorCode.invalidExpiryDate.rawValue {
-      errors[ErrorCode.invalidExpiryDate.rawValue] = "Expiry date is invalid."
+      errors.append(OttError(ErrorCode.invalidExpiryDate.rawValue,"Expiry date is invalid."))
     }
     if (retCode & ErrorCode.invalidInput.rawValue) == ErrorCode.invalidInput.rawValue {
-      errors[ErrorCode.invalidInput.rawValue] = "Invalid Input (positive number expected)."
+      errors.append(OttError(ErrorCode.invalidInput.rawValue, "Invalid Input (positive number expected)."))
     }
     if (retCode & ErrorCode.commsNoResponse.rawValue) == ErrorCode.commsNoResponse.rawValue {
-      errors[ErrorCode.commsNoResponse.rawValue] = "Communications failure. Server returned an empty response."
+      errors.append(OttError(ErrorCode.commsNoResponse.rawValue, "Communications failure. Server returned an empty response."))
     }
     if (retCode & ErrorCode.commsParseFailure.rawValue) == ErrorCode.commsParseFailure.rawValue {
-      errors[ErrorCode.commsParseFailure.rawValue] = "Communications failure. Response from server could not be parsed."
+      errors.append(OttError(ErrorCode.commsParseFailure.rawValue, "Communications failure. Response from server could not be parsed."))
     }
     if (retCode & ErrorCode.commsServerUnreachable.rawValue) == ErrorCode.commsServerUnreachable.rawValue {
-      errors[ ErrorCode.commsServerUnreachable.rawValue] = "Communications failure. Failed to establish communications."
+      errors.append(OttError(ErrorCode.commsServerUnreachable.rawValue, "Communications failure. Failed to establish communications."))
     }
     if (retCode & ErrorCode.commsUnexpectedResponse.rawValue) == ErrorCode.commsUnexpectedResponse.rawValue {
-      errors[ErrorCode.commsUnexpectedResponse.rawValue]  = "Communications failure. Unexpected response."
+      errors.append(OttError(ErrorCode.commsUnexpectedResponse.rawValue, "Communications failure. Unexpected response."))
     }
     return errors;
   }
@@ -205,23 +169,53 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
       "cc_pan_remainder": paddedData.cc_pan_remainder
     ]
     
-    Alamofire.request(self.tokenServiceUrl, method:.post, parameters: parameters, headers: headers)
+    Alamofire.request(self.tokenServiceUrl, method: .post, parameters: parameters, headers: headers)
+      .validate()
       .responseObject { (response: DataResponse<TokenResponse>) in
-        debugPrint(response.result.debugDescription)
-        if response.result.isSuccess {
-          if let resp = response.result.value {
-          debugPrint(resp.token ?? "token is nil")
-            debugPrint(resp.errors?.count ?? "error is nil")
+        
+        if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+          if utf8Text.isEmpty {
+            let errors = self.generateErrors(ErrorCode.commsNoResponse.rawValue)
+            responseHandler(Payload(payload: nil, ccPanBin: nil, ccPanLast4: nil, error: errors))
+            return
           }
-          debugPrint("request success!")
-        } else {
-          debugPrint("request failed")
-          let errors = self.generateErrors(ErrorCode.commsServerUnreachable.rawValue)
-          responseHandler(Payload(payload: nil, ccPanBin: nil, ccPanLast4: nil, error: errors))
         }
+        
+        switch response.result {
+        case .success:
+          if let token = response.result.value?.token {
+            responseHandler(Payload(payload: "1" + token + paddedData.pad, ccPanBin: paddedData.cc_pan_bin, ccPanLast4: paddedData.cc_pan_last4, error: nil))
+            return
+          }
+          
+          if let errors = response.result.value?.errors {
+            responseHandler(Payload(payload: nil, ccPanBin: nil, ccPanLast4: nil, error: errors))
+            return
+          }
+          
+          break
+        case .failure(let error):
+          if let afError = error as? AFError {
+            switch afError {
+            case AFError.responseValidationFailed(reason: AFError.ResponseValidationFailureReason.unacceptableStatusCode(404)):
+              let errors = self.generateErrors(ErrorCode.commsServerUnreachable.rawValue)
+              responseHandler(Payload(payload: nil, ccPanBin: nil, ccPanLast4: nil, error: errors))
+              return
+            default:
+              break
+            }
+          }
+          
+          let errors = self.generateErrors(ErrorCode.commsParseFailure.rawValue)
+          responseHandler(Payload(payload: nil, ccPanBin: nil, ccPanLast4: nil, error: errors))
+          break
+        }
+        
+        let errors = self.generateErrors(ErrorCode.commsUnexpectedResponse.rawValue)
+        responseHandler(Payload(payload: nil, ccPanBin: nil, ccPanLast4: nil, error: errors))
     }
   }
-  
+
   func getPaddedData(ccPan: String, ccCvv: String, ccExpmonth: String, ccExpyear: String) throws -> PaddedData {
     
     let cc_pan_bin = ccPan.substring(to: ccPan.index(ccPan.startIndex, offsetBy: 6))
@@ -245,7 +239,6 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     let panRemainderResult = try getEncrypted(cc_pan_remainder)
     pad += panRemainderResult.pad
     cc_pan_remainder = panRemainderResult.val
-    
     
     return PaddedData(cc_cvv: cc_cvv, cc_expmonth: cc_expmonth, cc_expyear: cc_expyear, cc_pan_remainder: cc_pan_remainder
       , pad: pad, cc_pan_bin: cc_pan_bin, cc_pan_last4: cc_pan_last4)
@@ -279,5 +272,4 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
       }
     }
   }
-  
 }

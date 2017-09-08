@@ -25,6 +25,8 @@
 		68857E861F5D451C002E1647 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E2D1F5D1EFC002E1647 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		68857E881F5D452D002E1647 /* AlamofireObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E451F5D3D9D002E1647 /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		68857E8A1F5D452D002E1647 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E461F5D3D9D002E1647 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		68F030FF1F623B6800E9C985 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F030FE1F623B6800E9C985 /* Options.swift */; };
+		68F031011F623BA700E9C985 /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F031001F623BA700E9C985 /* Payload.swift */; };
 		68F099A21F612A3A000170A0 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F099A11F612A3A000170A0 /* TokenResponse.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +92,8 @@
 		68857E451F5D3D9D002E1647 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = "../../../Library/Developer/Xcode/DerivedData/IPG-abvlyebgidrcjzfnzbrzyalwhyop/Build/Products/Debug-iphonesimulator/AlamofireObjectMapper/AlamofireObjectMapper.framework"; sourceTree = "<group>"; };
 		68857E461F5D3D9D002E1647 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "../../../Library/Developer/Xcode/DerivedData/IPG-abvlyebgidrcjzfnzbrzyalwhyop/Build/Products/Debug-iphonesimulator/ObjectMapper/ObjectMapper.framework"; sourceTree = "<group>"; };
 		68857E8B1F5D4548002E1647 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		68F030FE1F623B6800E9C985 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		68F031001F623BA700E9C985 /* Payload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
 		68F099A11F612A3A000170A0 /* TokenResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		E105D02E255FE7148F669E20 /* Pods-IPG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPG.release.xcconfig"; path = "Pods/Target Support Files/Pods-IPG/Pods-IPG.release.xcconfig"; sourceTree = "<group>"; };
 		EEA2A645892DD04C61759857 /* Pods-IPG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPG.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IPG/Pods-IPG.debug.xcconfig"; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 				682410A81F5E91EF00A5A610 /* Regex.swift */,
 				6826A0661F5F8930006ECFC1 /* Date.swift */,
 				68F099A11F612A3A000170A0 /* TokenResponse.swift */,
+				68F030FE1F623B6800E9C985 /* Options.swift */,
+				68F031001F623BA700E9C985 /* Payload.swift */,
 			);
 			path = IPG;
 			sourceTree = "<group>";
@@ -395,9 +401,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6826A0671F5F8930006ECFC1 /* Date.swift in Sources */,
+				68F031011F623BA700E9C985 /* Payload.swift in Sources */,
 				68F099A21F612A3A000170A0 /* TokenResponse.swift in Sources */,
 				682410A91F5E91EF00A5A610 /* Regex.swift in Sources */,
 				682410A51F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift in Sources */,
+				68F030FF1F623B6800E9C985 /* Options.swift in Sources */,
 				682410A71F5E4B2A00A5A610 /* ErrorCode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
