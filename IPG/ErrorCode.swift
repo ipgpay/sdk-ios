@@ -19,6 +19,7 @@ enum ErrorCode: Int , Error {
   case commsUnexpectedResponse = 128
 }
 
+/// One time token error protocol.
 public protocol OttErrorProtocol {
   var errorCode: Int? { get set }
   var errorMessage: String? { get set }

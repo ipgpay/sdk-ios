@@ -39,7 +39,6 @@ class OttError: OttErrorProtocol, Mappable {
   }
   
   func mapping(map: Map) {
-    
     let transform = TransformOf<Int, String>(fromJSON: { (value: String?) -> Int? in
       return Int(value!)
     }, toJSON: { (value: Int?) -> String? in

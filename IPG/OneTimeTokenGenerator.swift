@@ -10,12 +10,19 @@ import Foundation
 import Alamofire
 import AlamofireObjectMapper
 
+/// One time token generator protocol.
 public protocol OneTimeTokenGeneratorProtocol {
   
+  /// Method to generate payload with API method.
+  ///
+  /// - Parameters:
+  ///   - options: The data include credit card details.
+  ///   - responseHandler: A callback function for the client to handle the response object.
   func getPayload(_ options: OptionsProtocol, _ responseHandler: @escaping (PayloadProtocol) -> Void)
   
 }
 
+/// The data include encrypted credit card details.
 struct PaddedData {
   var cc_cvv: String
   var cc_expmonth: String
@@ -27,26 +34,46 @@ struct PaddedData {
   var cc_pan_last4: String
 }
 
+/// The generator for get one time token.
 public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
   
   var authKey: String
   var tokenServiceUrl: String
   
+  /// Initializes a new one time token generator with the provided parts and specifications.
+  ///
+  /// - Parameters:
+  ///   - authKey: The authorization key.
+  ///   - tokenServiceUrl: The token service url.
   public init(_ authKey: String, _ tokenServiceUrl: String) {
     self.authKey = authKey
     self.tokenServiceUrl = tokenServiceUrl
   }
   
+  /// Check if the input string are valid numbers or not.
+  ///
+  /// - Parameter text: The string needs to be checked, this should be cc-cvv, cc-pan etc.
+  /// - Returns: Returns true if the input string contains only numbers, otherwise false.
   func isNormalInteger(_ text: String) -> Bool {
     let regex = Regex()
     return regex.test(for: "^\\+?([0-9]\\d*)$", in: text)
   }
   
+  /// Check if the cvv number of the redit card valid.
+  ///
+  /// - Parameter cvvNum: The string needs to be checked, this should be the cvv number.
+  /// - Returns: Returns true if the input string is valid, false otherwise.
   func isValidCVV(_ cvvNum: String) -> Bool {
     let regex = Regex()
     return regex.test(for: "^[0-9]{3,4}$", in: cvvNum)
   }
   
+  /// Check if the expiry date of the redit card valid, support 2 digits year and 2 digits month.
+  ///
+  /// - Parameters:
+  ///   - expYear: The credit card expiry year.
+  ///   - expMonth: The credit card expory month.
+  /// - Returns: Returns true if expiry date is valid (in the future), false otherwise.
   func isValidExpiryDate(_ expYear: String, _ expMonth: String) -> Bool {
     let regex = Regex()
     if expYear.isEmpty || !regex.test(for: "^[0-9]{2}$", in: expYear) {
@@ -64,6 +91,10 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     return today < expDate
   }
   
+  /// Check if the credit card number is valid according to luhn algorithm.
+  ///
+  /// - Parameter input: The string needs to be checked, this should be the credit card number.
+  /// - Returns: Returns true if the input string is valid, false otherwise.
   func isValidLuhn(_ input: String) -> Bool {
     var sum = 0
     let numdigits = input.characters.count
@@ -82,6 +113,11 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     return ((sum != 0) && (sum % 10) == 0)
   }
   
+  /// Get encrypted data of the string.
+  ///
+  /// - Parameter input: The string that needs to be encrypted, has to be all numbers.
+  /// - Returns: The encrypted data and pad.
+  /// - Throws: Throws the invalid input error.
   func getEncrypted(_ input: String) throws -> (pad: String, val: String) {
     if !isNormalInteger(input) {
       throw ErrorCode.invalidInput
@@ -99,6 +135,10 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     return (pad: pad, val: newVal)
   }
   
+  /// Generates the return code for validation.
+  ///
+  /// - Parameter options: The converted options.
+  /// - Returns: The number inlude error code.
   func validateData(_ options: OptionsProtocol) -> Int {
     var retCode = 0;
     
@@ -115,7 +155,11 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     return retCode
   }
   
-  func formatData(_ options: OptionsProtocol) -> OptionsProtocol {
+  /// Convert the input data to the format which is acceptable by remote service.
+  ///
+  /// - Parameter options: The options need to be formated.
+  /// - Returns: The formated options.
+  func convertData(_ options: OptionsProtocol) -> OptionsProtocol {
     
     let ccPan = options.ccPan.trimmingCharacters(in: .whitespacesAndNewlines)
     let ccCvv =  options.ccCvv.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -125,6 +169,10 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     return Options(ccPan: ccPan, ccCvv: ccCvv, ccExpyear: ccExpyear, ccExpmonth: ccExpmonth)
   }
   
+  /// Generates an array of errors.
+  ///
+  /// - Parameter retCode: Code returned from validation.
+  /// - Returns: An array of errors
   func generateErrors(_ retCode: Int) -> [OttErrorProtocol] {
     var errors = [OttErrorProtocol]()
     
@@ -155,7 +203,12 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     return errors;
   }
   
-  func getTokeniserServiceResponse(_ paddedData: PaddedData, _ responseHandler: @escaping (PayloadProtocol) -> Void) {
+  /// Get response from the token service.
+  ///
+  /// - Parameters:
+  ///   - paddedData: Padded data contains all the fields we need for the token service, must be the encrypted data.
+  ///   - responseHandler: A callback function for the client to handle the response object.
+  func getTokenServiceResponse(_ paddedData: PaddedData, _ responseHandler: @escaping (PayloadProtocol) -> Void) {
     let headers = [
       "Content-Type": "application/x-www-form-urlencoded"
     ]
@@ -215,7 +268,16 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
         responseHandler(Payload(payload: nil, ccPanBin: nil, ccPanLast4: nil, error: errors))
     }
   }
-
+  
+  /// Get the encrypted data from the card details.
+  ///
+  /// - Parameters:
+  ///   - ccPan: Credit card pan.
+  ///   - ccCvv: Credit card cvv.
+  ///   - ccExpmonth: credit card expiry month.
+  ///   - ccExpyear: credit card expiry year.
+  /// - Returns: The encrypted data.
+  /// - Throws: throws encrypt exeption.
   func getPaddedData(ccPan: String, ccCvv: String, ccExpmonth: String, ccExpyear: String) throws -> PaddedData {
     
     let cc_pan_bin = ccPan.substring(to: ccPan.index(ccPan.startIndex, offsetBy: 6))
@@ -244,9 +306,14 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
       , pad: pad, cc_pan_bin: cc_pan_bin, cc_pan_last4: cc_pan_last4)
   }
   
+  /// Method to generate payload with API method.
+  ///
+  /// - Parameters:
+  ///   - options: The data include credit card details.
+  ///   - responseHandler: A callback function for the client to handle the response object.
   public func getPayload(_ options: OptionsProtocol, _ responseHandler: @escaping (PayloadProtocol) -> Void) {
     
-    let formatOptions = formatData(options)
+    let formatOptions = convertData(options)
     let retCode = validateData(formatOptions)
     var response: PayloadProtocol
     
@@ -264,7 +331,7 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
       }
       
       if let result = paddedResult {
-        getTokeniserServiceResponse(result, responseHandler)
+        getTokenServiceResponse(result, responseHandler)
       } else {
         let errors = generateErrors(ErrorCode.invalidInput.rawValue)
         response = Payload(payload: nil, ccPanBin: nil, ccPanLast4: nil, error: errors)
