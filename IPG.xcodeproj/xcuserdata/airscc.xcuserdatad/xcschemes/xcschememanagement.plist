@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>IPG Demo.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>IPG.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -33,6 +38,11 @@
 			<true/>
 		</dict>
 		<key>68857E1A1F5D1DDA002E1647</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>68EDF7241F67A24900DD338A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
