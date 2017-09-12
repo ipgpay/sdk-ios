@@ -21,15 +21,23 @@ public class CapabilityLookup {
   public func getCapabilities(_ responseHandler: @escaping ([Currency]) -> Void) {
     let url = self.capabilityServiceUrl + "/" + self.authKey
     Alamofire.request(url, method: .get, parameters: nil)
-      .response { response in
-        if let xmlData = response.data {
-          let parse = XMLParser(data: xmlData)
-          let delegate = CapabilityResponseXmlParse()
-          parse.delegate = delegate
-          parse.parse()
-          let currencies = delegate.currencies
-          responseHandler(currencies)
-        } else {
+      .validate()
+      .responseData { response in
+        switch response.result {
+        case .success:
+          if let xmlData = response.data {
+            let parse = XMLParser(data: xmlData)
+            let delegate = CapabilityResponseXMLParserDelegate()
+            parse.delegate = delegate
+            parse.parse()
+            let currencies = delegate.currencies
+            responseHandler(currencies)
+          } else {
+            let currencies = [Currency]()
+            responseHandler(currencies)
+          }
+        case .failure(let error):
+          debugPrint(error)
           let currencies = [Currency]()
           responseHandler(currencies)
         }

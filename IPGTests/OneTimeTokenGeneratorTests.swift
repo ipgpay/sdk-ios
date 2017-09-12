@@ -45,7 +45,7 @@ class OneTimeTokenGeneratorTests: XCTestCase {
   }
   
   func testisValidExpiryDate() {
-    XCTAssert(ott.isValidExpiryDate("17","11") == true)
+    XCTAssert(ott.isValidExpiryDate("37","11") == true)
     XCTAssert(ott.isValidExpiryDate("99","01") == true)
     
     XCTAssert(ott.isValidExpiryDate("9999","12") == false)

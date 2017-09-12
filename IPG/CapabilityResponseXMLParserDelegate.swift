@@ -1,5 +1,5 @@
 //
-//  CapabilityResponseXmlParse.swift
+//  CapabilityResponseXMLParserDelegate.swift
 //  IPG
 //
 //  Created by AirS CC on 11/09/2017.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CapabilityResponseXmlParse : NSObject, XMLParserDelegate {
+class CapabilityResponseXMLParserDelegate: NSObject, XMLParserDelegate {
   var currencies = [Currency]()
   
   var currentCurrency = Currency()
@@ -16,13 +16,13 @@ class CapabilityResponseXmlParse : NSObject, XMLParserDelegate {
   var currentFoundCharacters = ""
   
   public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-    if elementName == "Currency" {
+    if "Currency".caseInsensitiveCompare(elementName) == ComparisonResult.orderedSame {
       if let code = attributeDict["code"] {
         self.currentCurrency.code = code
       }
     }
     
-    if elementName == "PaymentMethod" {
+    if "PaymentMethod".caseInsensitiveCompare(elementName) == ComparisonResult.orderedSame {
       if let method = attributeDict["method"] {
         self.currentPayment.method = method
       }
@@ -30,13 +30,11 @@ class CapabilityResponseXmlParse : NSObject, XMLParserDelegate {
   }
   
   public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-    
-    if elementName == "PaymentType" {
+    if "PaymentType".caseInsensitiveCompare(elementName) == ComparisonResult.orderedSame {
       self.currentPayment.types.append(self.currentFoundCharacters)
     }
     
-    if elementName == "PaymentMethod" {
-      
+    if "PaymentMethod".caseInsensitiveCompare(elementName) == ComparisonResult.orderedSame {
       var tempPayment = Payment()
       tempPayment.method = self.currentPayment.method
       tempPayment.types = self.currentPayment.types
@@ -44,10 +42,9 @@ class CapabilityResponseXmlParse : NSObject, XMLParserDelegate {
       
       self.currentPayment.method = ""
       self.currentPayment.types.removeAll()
-      
     }
     
-    if elementName == "Currency" {
+    if "Currency".caseInsensitiveCompare(elementName) == ComparisonResult.orderedSame {
       var tempCurrency = Currency()
       tempCurrency.code = self.currentCurrency.code
       tempCurrency.payments = self.currentCurrency.payments

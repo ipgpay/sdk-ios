@@ -15,7 +15,6 @@
 		6826A07A1F5FD3D4006ECFC1 /* OneTimeTokenGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826A0791F5FD3D4006ECFC1 /* OneTimeTokenGeneratorTests.swift */; };
 		6826EB3F1F665AD700F25930 /* PaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826EB3E1F665AD700F25930 /* PaymentMethod.swift */; };
 		6826EB411F66644A00F25930 /* CapabilityLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826EB401F66644A00F25930 /* CapabilityLookup.swift */; };
-		6826EB431F6688D600F25930 /* CapabilityResponseXmlParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826EB421F6688D600F25930 /* CapabilityResponseXmlParse.swift */; };
 		68857E1E1F5D1DDA002E1647 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68857E1D1F5D1DDA002E1647 /* AppDelegate.swift */; };
 		68857E201F5D1DDA002E1647 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68857E1F1F5D1DDA002E1647 /* ViewController.swift */; };
 		68857E231F5D1DDA002E1647 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68857E211F5D1DDA002E1647 /* Main.storyboard */; };
@@ -28,6 +27,8 @@
 		68857E861F5D451C002E1647 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E2D1F5D1EFC002E1647 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		68857E881F5D452D002E1647 /* AlamofireObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E451F5D3D9D002E1647 /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		68857E8A1F5D452D002E1647 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E461F5D3D9D002E1647 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		68EDF71E1F6774C900DD338A /* CapabilityResponseXMLParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EDF71D1F6774C900DD338A /* CapabilityResponseXMLParserDelegate.swift */; };
+		68EDF7201F677C9A00DD338A /* CapabilityLookupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EDF71F1F677C9A00DD338A /* CapabilityLookupTests.swift */; };
 		68F030FF1F623B6800E9C985 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F030FE1F623B6800E9C985 /* Options.swift */; };
 		68F031011F623BA700E9C985 /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F031001F623BA700E9C985 /* Payload.swift */; };
 		68F099A21F612A3A000170A0 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F099A11F612A3A000170A0 /* TokenResponse.swift */; };
@@ -84,7 +85,6 @@
 		6826A0791F5FD3D4006ECFC1 /* OneTimeTokenGeneratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeTokenGeneratorTests.swift; sourceTree = "<group>"; };
 		6826EB3E1F665AD700F25930 /* PaymentMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethod.swift; sourceTree = "<group>"; };
 		6826EB401F66644A00F25930 /* CapabilityLookup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapabilityLookup.swift; sourceTree = "<group>"; };
-		6826EB421F6688D600F25930 /* CapabilityResponseXmlParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapabilityResponseXmlParse.swift; sourceTree = "<group>"; };
 		68857E0C1F5D1D5C002E1647 /* IPG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IPG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68857E101F5D1D5C002E1647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68857E1B1F5D1DDA002E1647 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +98,8 @@
 		68857E451F5D3D9D002E1647 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = "../../../Library/Developer/Xcode/DerivedData/IPG-abvlyebgidrcjzfnzbrzyalwhyop/Build/Products/Debug-iphonesimulator/AlamofireObjectMapper/AlamofireObjectMapper.framework"; sourceTree = "<group>"; };
 		68857E461F5D3D9D002E1647 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "../../../Library/Developer/Xcode/DerivedData/IPG-abvlyebgidrcjzfnzbrzyalwhyop/Build/Products/Debug-iphonesimulator/ObjectMapper/ObjectMapper.framework"; sourceTree = "<group>"; };
 		68857E8B1F5D4548002E1647 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		68EDF71D1F6774C900DD338A /* CapabilityResponseXMLParserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapabilityResponseXMLParserDelegate.swift; sourceTree = "<group>"; };
+		68EDF71F1F677C9A00DD338A /* CapabilityLookupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapabilityLookupTests.swift; sourceTree = "<group>"; };
 		68F030FE1F623B6800E9C985 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		68F031001F623BA700E9C985 /* Payload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
 		68F099A11F612A3A000170A0 /* TokenResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			children = (
 				6826A0701F5FCEE7006ECFC1 /* Info.plist */,
 				6826A0791F5FD3D4006ECFC1 /* OneTimeTokenGeneratorTests.swift */,
+				68EDF71F1F677C9A00DD338A /* CapabilityLookupTests.swift */,
 			);
 			path = IPGTests;
 			sourceTree = "<group>";
@@ -170,7 +173,7 @@
 			children = (
 				68857E101F5D1D5C002E1647 /* Info.plist */,
 				6826EB401F66644A00F25930 /* CapabilityLookup.swift */,
-				6826EB421F6688D600F25930 /* CapabilityResponseXmlParse.swift */,
+				68EDF71D1F6774C900DD338A /* CapabilityResponseXMLParserDelegate.swift */,
 				6826A0661F5F8930006ECFC1 /* Date.swift */,
 				682410A61F5E4B2A00A5A610 /* ErrorCode.swift */,
 				682410A41F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift */,
@@ -402,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6826A07A1F5FD3D4006ECFC1 /* OneTimeTokenGeneratorTests.swift in Sources */,
+				68EDF7201F677C9A00DD338A /* CapabilityLookupTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,9 +415,9 @@
 			files = (
 				6826A0671F5F8930006ECFC1 /* Date.swift in Sources */,
 				68F031011F623BA700E9C985 /* Payload.swift in Sources */,
-				6826EB431F6688D600F25930 /* CapabilityResponseXmlParse.swift in Sources */,
 				68F099A21F612A3A000170A0 /* TokenResponse.swift in Sources */,
 				682410A91F5E91EF00A5A610 /* Regex.swift in Sources */,
+				68EDF71E1F6774C900DD338A /* CapabilityResponseXMLParserDelegate.swift in Sources */,
 				682410A51F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift in Sources */,
 				68F030FF1F623B6800E9C985 /* Options.swift in Sources */,
 				6826EB411F66644A00F25930 /* CapabilityLookup.swift in Sources */,
