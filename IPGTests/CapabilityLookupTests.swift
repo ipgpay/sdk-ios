@@ -11,9 +11,9 @@ import OHHTTPStubs
 @testable import IPG
 
 class CapabilityLookupTests: XCTestCase {
-  let testHost = "ott.test.ipg"
-  let cl = CapabilityLookup("testkey", "http://ott.test.ipg")
-  let clNotFound = CapabilityLookup("testkey", "http://ott.test.ipg")
+  let testHost = "cl.test.ipg"
+  let cl = CapabilityLookup("testkey", "http://cl.test.ipg")
+  
   override func setUp() {
     super.setUp()
   }
@@ -49,11 +49,11 @@ class CapabilityLookupTests: XCTestCase {
   func testgetCapabilities_NotFound() {
     let tempStub = stub(condition: isHost(self.testHost) && isMethodGET()) { _ in
       let obj = [""]
-      return OHHTTPStubsResponse(jsonObject: obj, statusCode: 404, headers: ["Content-Type":"application/json"])
+      return OHHTTPStubsResponse(jsonObject: obj, statusCode: 404, headers: ["Content-Type":"text/xml"])
     }
     
     let tempExpectation = expectation(description: "testgetCapabilities_NotFound")
-    clNotFound.getCapabilities { currencies in
+    cl.getCapabilities { currencies in
       
       XCTAssert(currencies.count == 0)
       

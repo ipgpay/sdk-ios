@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// XML parser delegate for parse response xml
 class CapabilityResponseXMLParserDelegate: NSObject, XMLParserDelegate {
   var currencies = [Currency]()
   
