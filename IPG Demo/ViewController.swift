@@ -10,13 +10,18 @@ import UIKit
 import IPG
 
 class ViewController: UIViewController {
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    /// replace with prod service url
+    let tokenServiceUrl = "url"
+    let capabilityServiceUrl = "url"
+    let serviceAuthKey = "key"
+    
     // sample for one time token generate
-    let options = Options(ccPan: "4012888888881881", ccCvv: "318", ccExpyear: "29", ccExpmonth: "09")
-    let ott = OneTimeTokenGenerator("testkey","http://private-ed273e-ipg.apiary-mock.com/tokensuccess")
+    let options = Options(ccPan: "4012888888881881", ccCvv: "123", ccExpyear: "22", ccExpmonth: "09")
+    let ott = OneTimeTokenGenerator(serviceAuthKey, tokenServiceUrl)
     ott.getPayload(options) { response in
       if let payload = response.payload {
         debugPrint("this payload is: \(payload)")
@@ -27,21 +32,23 @@ class ViewController: UIViewController {
       }
     }
     
+    
     // sample for capability look up
-    let lookup = CapabilityLookup("authkey", "http://private-ed273e-ipg.apiary-mock.com/capability")
+    let lookup = CapabilityLookup(serviceAuthKey, capabilityServiceUrl)
     lookup.getCapabilities { response in
+      debugPrint("currency count : \(response.count)")
       for currency in response {
         debugPrint("currency code : \(currency.code)")
       }
     }
     
   }
-
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-
-
+  
+  
 }
 
