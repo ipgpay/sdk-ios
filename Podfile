@@ -7,3 +7,7 @@ target ‘IPG’ do
     pod 'ObjectMapper', '~> 2.2.8’
     pod 'AlamofireObjectMapper', '~> 4.1.0'
 end
+
+target ‘IPGTests’ do
+  pod 'OHHTTPStubs/Swift'
+end
