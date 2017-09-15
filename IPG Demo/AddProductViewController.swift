@@ -33,7 +33,7 @@ class AddProuctViewController: UIViewController, UITextFieldDelegate {
       alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
       self.present(alertController, animated: true, completion: nil)
     } else {
-      self.delegate?.addProduct(productName: self.prodNameText.text!, quantity: Int(self.quantityStepper.value), price: Int(self.priceText.text!)!)
+      self.delegate?.addProduct(productName: self.prodNameText.text!, quantity: Int(self.quantityStepper.value), price: Double(self.priceText.text!)!)
       self.dismiss(animated: true, completion: nil)
     }
   }

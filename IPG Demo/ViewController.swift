@@ -11,17 +11,16 @@ import IPG
 
 protocol AddProductDelegate
 {
-  func addProduct(productName: String, quantity: Int, price: Int)
+  func addProduct(productName: String, quantity: Int, price: Double)
 }
 
-class ViewController: UIViewController, UITableViewDataSource, AddProductDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddProductDelegate {
   
   var cartList: [Product] = [Product]()
   
   @IBOutlet weak var payBtn: UIButton!
   @IBOutlet weak var cartTableView: UITableView!
-  @IBOutlet weak var clearCartbtn: UIButton!
-  @IBOutlet weak var addProductBtn: UIButton!
+  @IBOutlet weak var totalLabel: UILabel!
   
   @IBAction func addProduct(_ sender: Any) {
     
@@ -36,19 +35,14 @@ class ViewController: UIViewController, UITableViewDataSource, AddProductDelegat
   @IBAction func clearCart(_ sender: Any) {
     self.cartList.removeAll()
     self.cartTableView.reloadData()
-    if self.cartList.count == 0 {
-      self.payBtn.isHidden = true
-      self.clearCartbtn.isHidden = true
-    }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-  
+    self.cartList.append(Product(name: "TEST ITEM- HQ line 1 (TEST ITEM- HQ line 1)", qty: 0, price: 1.20, description: "Test item for demonstration- HK$1 + 3 % credit card processing fee HK$0.2"))
+    self.cartList.append(Product(name: "TEST ITEM- HQ line 2 (TEST ITEM- HQ line 2)", qty: 0, price: 1.60, description: "Test item for demonstration- HK$1 + 3 % credit card processing fee HK$0.2"))
     self.cartTableView.dataSource = self
-    self.payBtn.isHidden = true
-    self.clearCartbtn.isHidden = true
-    
+    self.totalLabel.text = "Total HKD 2.80"
     //    /// replace with prod service url
     //    let tokenServiceUrl = "url"
     //    let capabilityServiceUrl = "url"
@@ -86,19 +80,14 @@ class ViewController: UIViewController, UITableViewDataSource, AddProductDelegat
     let cell = self.cartTableView.dequeueReusableCell(withIdentifier: "prodCell")! as! ProductTableViewCell
     let dest = self.cartList[indexPath.row] as Product
     cell.prodLabel.text = dest.name
-    cell.qtyLabel.text = String(dest.qty)
     cell.priceLabel.text = String(dest.price)
+    cell.descriptionLabel.text = dest.description
     return cell
   }
   
-  func addProduct(productName: String, quantity: Int, price: Int) {
-    self.cartList.append(Product(name: productName, qty: quantity, price: price))
+  func addProduct(productName: String, quantity: Int, price: Double) {
+    self.cartList.append(Product(name: productName, qty: quantity, price: price, description: ""))
     self.cartTableView.reloadData()
-    
-    if self.cartList.count > 0 {
-      self.payBtn.isHidden = false
-      self.clearCartbtn.isHidden = false
-    }
   }
   
 }

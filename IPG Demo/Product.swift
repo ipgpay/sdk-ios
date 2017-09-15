@@ -12,11 +12,13 @@ import UIKit
 class Product {
   var name: String
   var qty: Int
-  var price: Int
+  var price: Double
+  var description: String
   
-  init(name: String, qty: Int, price: Int) {
+  init(name: String, qty: Int, price: Double, description: String) {
     self.name = name
     self.qty = qty
     self.price = price
+    self.description = description
   }
 }
