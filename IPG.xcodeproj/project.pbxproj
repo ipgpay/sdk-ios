@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6813EF901F6A26BE00BC64F3 /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6813EF8F1F6A26BE00BC64F3 /* AddProductViewController.swift */; };
 		6813EF941F6A604100BC64F3 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6813EF931F6A604100BC64F3 /* ProductTableViewCell.swift */; };
 		6813EF961F6A620A00BC64F3 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6813EF951F6A620A00BC64F3 /* Product.swift */; };
 		682410A51F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682410A41F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift */; };
@@ -43,6 +42,7 @@
 		68EDF73F1F67A6F400DD338A /* IPG.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E0C1F5D1D5C002E1647 /* IPG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		68EE863F1F68C9A6008D3A11 /* emptyresponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 68EE863E1F68C9A6008D3A11 /* emptyresponse.json */; };
 		68EE86411F68CB69008D3A11 /* successresponse.xml in Resources */ = {isa = PBXBuildFile; fileRef = 68EE86401F68CB69008D3A11 /* successresponse.xml */; };
+		68EF11051F6FA5B2005A70CF /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EF11041F6FA5B2005A70CF /* plus.png */; };
 		68F030FF1F623B6800E9C985 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F030FE1F623B6800E9C985 /* Options.swift */; };
 		68F031011F623BA700E9C985 /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F031001F623BA700E9C985 /* Payload.swift */; };
 		68F099A21F612A3A000170A0 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F099A11F612A3A000170A0 /* TokenResponse.swift */; };
@@ -116,7 +116,6 @@
 /* Begin PBXFileReference section */
 		0AACF6CB5E83B626D7B7F187 /* Pods_IPGTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IPGTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A45A81F529B7BD5DC49592B /* Pods_IPG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IPG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6813EF8F1F6A26BE00BC64F3 /* AddProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		6813EF931F6A604100BC64F3 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		6813EF951F6A620A00BC64F3 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		682410A41F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeTokenGenerator.swift; sourceTree = "<group>"; };
@@ -153,6 +152,7 @@
 		68EDF74B1F67C3CF00DD338A /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = "../../../Library/Developer/Xcode/DerivedData/IPG-abvlyebgidrcjzfnzbrzyalwhyop/Build/Products/Debug-iphonesimulator/OHHTTPStubs/OHHTTPStubs.framework"; sourceTree = "<group>"; };
 		68EE863E1F68C9A6008D3A11 /* emptyresponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyresponse.json; sourceTree = "<group>"; };
 		68EE86401F68CB69008D3A11 /* successresponse.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = successresponse.xml; sourceTree = "<group>"; };
+		68EF11041F6FA5B2005A70CF /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plus.png; path = images/plus.png; sourceTree = "<group>"; };
 		68F030FE1F623B6800E9C985 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		68F031001F623BA700E9C985 /* Payload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
 		68F099A11F612A3A000170A0 /* TokenResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
@@ -275,7 +275,6 @@
 				68EDF7271F67A24900DD338A /* AppDelegate.swift */,
 				68EDF7291F67A24900DD338A /* ViewController.swift */,
 				6813EF931F6A604100BC64F3 /* ProductTableViewCell.swift */,
-				6813EF8F1F6A26BE00BC64F3 /* AddProductViewController.swift */,
 				68EDF72B1F67A24900DD338A /* Main.storyboard */,
 				68EDF72E1F67A24900DD338A /* Assets.xcassets */,
 				68EDF7301F67A24900DD338A /* LaunchScreen.storyboard */,
@@ -288,6 +287,7 @@
 		68F313B91F6BA07C00EDB80D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				68EF11041F6FA5B2005A70CF /* plus.png */,
 				68F313BE1F6BA10300EDB80D /* credit-card-alt.png */,
 				68F313BF1F6BA10300EDB80D /* shopping-cart.png */,
 			);
@@ -499,6 +499,7 @@
 				68F313C01F6BA10300EDB80D /* credit-card-alt.png in Resources */,
 				68EDF72D1F67A24900DD338A /* Main.storyboard in Resources */,
 				68F313C11F6BA10300EDB80D /* shopping-cart.png in Resources */,
+				68EF11051F6FA5B2005A70CF /* plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,7 +642,6 @@
 				6813EF941F6A604100BC64F3 /* ProductTableViewCell.swift in Sources */,
 				6813EF961F6A620A00BC64F3 /* Product.swift in Sources */,
 				68EDF7281F67A24900DD338A /* AppDelegate.swift in Sources */,
-				6813EF901F6A26BE00BC64F3 /* AddProductViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

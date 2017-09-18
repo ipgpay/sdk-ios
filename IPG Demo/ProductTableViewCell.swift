@@ -9,13 +9,13 @@
 import UIKit
 
 class ProductTableViewCell: UITableViewCell {
-  
-  @IBOutlet weak var descriptionLabel: UILabel!
   //MARK: Properties
   
   @IBOutlet weak var priceLabel: UILabel!
   @IBOutlet weak var prodLabel: UILabel!
+  @IBOutlet weak var qtyLabel: UILabel!
   override func awakeFromNib() {
+    
     super.awakeFromNib()
     // Initialization code
   }
