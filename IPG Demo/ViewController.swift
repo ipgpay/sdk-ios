@@ -48,6 +48,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
   }
   
+  @IBAction func purchaseAction(_ sender: Any) {
+    debugPrint("purechase!")
+  }
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
