@@ -19,4 +19,8 @@ class Product {
     self.qty = qty
     self.price = price
   }
+  
+  func toDict() -> [String: String] {
+    return ["name": name, "qty": String(qty), "price": String(price)]
+  }
 }

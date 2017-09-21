@@ -320,6 +320,7 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     if retCode != 0 {
       let errors = generateErrors(retCode)
       response = Payload(payload: nil, ccPanBin: nil, ccPanLast4: nil, error: errors)
+      responseHandler(response)
     }
     else {
       let paddedResult: PaddedData?

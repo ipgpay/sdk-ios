@@ -11,20 +11,43 @@ import IPG
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
   
+  let tokenServiceUrl = "https://payment.ipgholdings.net/service/token/create"
+  let capabilityServiceUrl = "url"
+  let serviceAuthKey = "ZnHvGDpYJhkQ"
+  let merchantServer: MerchantServer = MerchantServer("http://192.168.0.174")
+  
   var cartList: [Product] = [Product]()
   var pickerDataSource = [
     ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
     ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027"]]
   
+  /// show error
+  @IBOutlet weak var errorStackView: UIStackView!
+  @IBOutlet weak var errorLabel: UILabel!
+  
+  /// for cart list display and add
   @IBOutlet weak var addQtyText: UITextField!
+ 
   @IBOutlet weak var addPriceText: UITextField!
   @IBOutlet weak var addNameText: UITextField!
-  
-  @IBOutlet weak var payBtn: UIButton!
   @IBOutlet weak var cartTableView: UITableView!
   @IBOutlet weak var totalLabel: UILabel!
   
+  /// for pruchase result
+  @IBOutlet weak var purchaseResultStackView: UIStackView!
+  @IBOutlet weak var orderId: UILabel!
+  @IBOutlet weak var orderChargeAccount: UILabel!
+  @IBOutlet weak var orderPurchaseFrom: UILabel!
+  @IBOutlet weak var orderPurchaseDate: UILabel!
+  
+  /// for payment input
+  @IBOutlet weak var paymentCVVText: UITextField!
   @IBOutlet weak var expDatePickerView: UIPickerView!
+  @IBOutlet weak var paymentLastNameText: UITextField!
+  @IBOutlet weak var paymentFirstNameText: UITextField!
+  @IBOutlet weak var paymentEmailText: UITextField!
+  @IBOutlet weak var paymentCardholderNameText: UITextField!
+  @IBOutlet weak var paymentCardNumberText: UITextField!
   
   @IBAction func addProductAction(_ sender: Any) {
     
@@ -49,9 +72,83 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   }
   
   @IBAction func purchaseAction(_ sender: Any) {
-    debugPrint("purechase!")
+
+    //validate input
+    var validateMessage = "";
+    if self.paymentCardNumberText.text == nil || self.paymentCardNumberText.text == "" {
+      validateMessage += "Card number should not be empty!\n"
+    }
+    if self.paymentCardholderNameText.text == nil || self.paymentCardholderNameText.text == "" {
+      validateMessage += "Cardholder name should not be empty!\n"
+    }
+    if self.paymentCVVText.text == nil || self.paymentCVVText.text == "" {
+      validateMessage += "CVV should not be empty!\n"
+    }
+    
+    if self.paymentEmailText.text == nil || self.paymentEmailText.text == "" {
+      validateMessage += "Email should not be empty!\n"
+    }
+    
+    if validateMessage != "" {
+      let alertController = UIAlertController(title: "Validate Info", message: validateMessage, preferredStyle: UIAlertControllerStyle.alert)
+      alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+      self.present(alertController, animated: true, completion: nil)
+      return
+    }
+    
+    let alert = UIAlertController(title: nil, message: "Loading...", preferredStyle: UIAlertControllerStyle.alert)
+    self.present(alert, animated: true, completion: nil)
+    
+    let month = pickerDataSource[0][self.expDatePickerView.selectedRow(inComponent: 0)]
+    let year = pickerDataSource[1][self.expDatePickerView.selectedRow(inComponent: 1)]
+    let yearLast2 = year.substring(from: year.index(year.startIndex, offsetBy: year.characters.count - 2))
+    
+    let options = Options(ccPan: self.paymentCardNumberText.text!, ccCvv: self.paymentCVVText.text!, ccExpyear: yearLast2, ccExpmonth: month)
+    let ott = OneTimeTokenGenerator(serviceAuthKey, tokenServiceUrl)
+    ott.getPayload(options) { response in
+      if let payload = response.payload {
+        debugPrint("this payload is: \(payload)")
+        
+        self.merchantServer.purchase(products: self.cartList, payload: payload, name: self.paymentCardholderNameText.text!, email: self.paymentEmailText.text!, responseHandler: { (detail) in
+          
+          if let orderId = detail.orderId {
+            debugPrint(orderId)
+            self.orderId.text = orderId
+            self.orderPurchaseFrom.text = "SHINE-MGR"
+            self.orderPurchaseDate.text = detail.orderDatetime
+            self.orderChargeAccount.text = detail.orderTotal
+            self.purchaseResultStackView.isHidden = false
+            self.errorStackView.isHidden = true
+            self.errorLabel.text = ""
+            alert.dismiss(animated: true, completion: nil)
+          } else{
+            alert.dismiss(animated: true, completion: nil)
+            var tempMessage = "submit order failed:\n"
+            if let errors = detail.errors {
+              for error in errors {
+                tempMessage += "error: code \(error.code ?? "0"), message: \(error.text ?? "")\n"
+              }
+            }
+            debugPrint(tempMessage)
+            self.alert(message: tempMessage)
+          }
+        })
+      } else if let errors = response.error {
+        alert.dismiss(animated: true, completion: nil)
+        var tempMessage = "Generate payload failed:\n"
+        for error in errors {
+          tempMessage += "error: code \(error.errorCode ?? 0), message: \(error.errorMessage ?? "")\n"
+        }
+        debugPrint(tempMessage)
+        self.alert(message: tempMessage)
+      }
+    }
   }
-  
+  func alert(message: String) {
+    self.purchaseResultStackView.isHidden = true
+    self.errorStackView.isHidden = false
+    self.errorLabel.text = message
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -64,38 +161,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     self.addPriceText.delegate = self
     
     let total = self.getTotal()
-    self.totalLabel.text = "Total \(total)"
+    self.totalLabel.text = "Total \(total)USD"
     
     self.expDatePickerView.dataSource = self
     self.expDatePickerView.delegate = self
     
-    //    /// replace with prod service url
-    //    let tokenServiceUrl = "url"
-    //    let capabilityServiceUrl = "url"
-    //    let serviceAuthKey = "key"
-    //
-    //    // sample for one time token generate
-    //    let options = Options(ccPan: "4012888888881881", ccCvv: "123", ccExpyear: "22", ccExpmonth: "09")
-    //    let ott = OneTimeTokenGenerator(serviceAuthKey, tokenServiceUrl)
-    //    ott.getPayload(options) { response in
-    //      if let payload = response.payload {
-    //        debugPrint("this payload is: \(payload)")
-    //      } else if let errors = response.error {
-    //        for error in errors {
-    //          debugPrint("error : code \(error.errorCode ?? 0), message \(error.errorMessage ?? "").")
-    //        }
-    //      }
-    //    }
-    //
-    //
-    //    // sample for capability look up
-    //    let lookup = CapabilityLookup(serviceAuthKey, capabilityServiceUrl)
-    //    lookup.getCapabilities { response in
-    //      debugPrint("currency count : \(response.count)")
-    //      for currency in response {
-    //        debugPrint("currency code : \(currency.code)")
-    //      }
-    //    }
+    self.purchaseResultStackView.isHidden = true
+    self.errorStackView.isHidden = true
+    
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -114,7 +187,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 2
   }
-
+  
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return pickerDataSource[component].count
   }
@@ -159,7 +232,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     self.addNameText.text = ""
     self.addQtyText.text = ""
     self.addPriceText.text = ""
-    self.totalLabel.text = "Total \(total)"
+    self.totalLabel.text = "Total \(total)USD"
   }
   
 }
