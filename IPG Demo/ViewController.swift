@@ -14,7 +14,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   let tokenServiceUrl = "https://payment.ipgholdings.net/service/token/create"
   let capabilityServiceUrl = "url"
   let serviceAuthKey = "ZnHvGDpYJhkQ"
-  let merchantServer: MerchantServer = MerchantServer("http://192.168.0.174")
+  let merchantServer: MerchantServer = MerchantServer("https://api-a2integ12-ipgpay.ipggroup.com/sdk/ipg-mobiledemo-server/index.php")
+  let textFieldShouldReturnDelegate = TextFieldShouldReturnDelegate()
   
   var cartList: [Product] = [Product]()
   var pickerDataSource = [
@@ -152,16 +153,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    // init data
     self.cartList.append(Product(name: "Product 1", qty: 2, price: 1.20))
     self.cartList.append(Product(name: "Product 2", qty: 3, price: 1.60))
+    let total = self.getTotal()
+    self.totalLabel.text = "Total \(total)USD"
     
+    //init control
     self.cartTableView.dataSource = self
     self.addQtyText.delegate = self
     self.addPriceText.delegate = self
+    self.addNameText.delegate = self.textFieldShouldReturnDelegate
     
-    let total = self.getTotal()
-    self.totalLabel.text = "Total \(total)USD"
+    self.paymentCardNumberText.delegate = self.textFieldShouldReturnDelegate
+    self.paymentCardholderNameText.delegate = self.textFieldShouldReturnDelegate
+    self.paymentCVVText.delegate = self.textFieldShouldReturnDelegate
+    self.paymentFirstNameText.delegate = self.textFieldShouldReturnDelegate
+    self.paymentLastNameText.delegate = self.textFieldShouldReturnDelegate
+    self.paymentEmailText.delegate = self.textFieldShouldReturnDelegate
     
     self.expDatePickerView.dataSource = self
     self.expDatePickerView.delegate = self
@@ -214,6 +223,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let components = string.components(separatedBy: inverseSet)
     let filtered = components.joined(separator: "")
     return string == filtered
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
   }
   
   func getTotal() -> Double {
