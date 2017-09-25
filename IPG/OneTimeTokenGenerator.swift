@@ -86,7 +86,8 @@ public class OneTimeTokenGenerator: OneTimeTokenGeneratorProtocol {
     let yearNumber = Int(expYear) ?? 0
     let monthNumber = Int(expMonth) ?? 0
     
-    let expDate = Date.from(yearNumber + 2000, monthNumber, 1)
+    let tempDate = Date.from(yearNumber + 2000, monthNumber, 1)
+    let expDate = Date.addMonth(1, to: tempDate)
     let today = Date()
     return today < expDate
   }

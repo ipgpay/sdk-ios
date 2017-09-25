@@ -21,6 +21,11 @@
 		6826EB3F1F665AD700F25930 /* PaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826EB3E1F665AD700F25930 /* PaymentMethod.swift */; };
 		6826EB411F66644A00F25930 /* CapabilityLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6826EB401F66644A00F25930 /* CapabilityLookup.swift */; };
 		6828728F1F726ADD00CA49FE /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6828728E1F726ADD00CA49FE /* Purchase.swift */; };
+		683F52331F78D6BE0012EC7F /* Pods_IPG_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A7F7A12CFC7282DF4C8E752 /* Pods_IPG_Demo.framework */; };
+		683F52481F78E0B10012EC7F /* IPG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E0C1F5D1D5C002E1647 /* IPG.framework */; };
+		683F52491F78E0B10012EC7F /* IPG.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E0C1F5D1D5C002E1647 /* IPG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		683F52501F78E4590012EC7F /* IPG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E0C1F5D1D5C002E1647 /* IPG.framework */; };
+		683F52511F78E4590012EC7F /* IPG.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68857E0C1F5D1D5C002E1647 /* IPG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		68857E1E1F5D1DDA002E1647 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68857E1D1F5D1DDA002E1647 /* AppDelegate.swift */; };
 		68857E201F5D1DDA002E1647 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68857E1F1F5D1DDA002E1647 /* ViewController.swift */; };
 		68857E231F5D1DDA002E1647 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68857E211F5D1DDA002E1647 /* Main.storyboard */; };
@@ -42,7 +47,6 @@
 		68F313C01F6BA10300EDB80D /* credit-card-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F313BE1F6BA10300EDB80D /* credit-card-alt.png */; };
 		68F313C11F6BA10300EDB80D /* shopping-cart.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F313BF1F6BA10300EDB80D /* shopping-cart.png */; };
 		AEC6CFBF5D0251643A93EDB2 /* Pods_IPGTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AACF6CB5E83B626D7B7F187 /* Pods_IPGTests.framework */; };
-		D2A0FB67A5F01E2951EE7895 /* Pods_IPG_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A7F7A12CFC7282DF4C8E752 /* Pods_IPG_Demo.framework */; };
 		FA0F07DB66239E6786547032 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C39436F4F2AB5FA8F581BE5 /* Pods_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,7 +65,46 @@
 			remoteGlobalIDString = 68857E1A1F5D1DDA002E1647;
 			remoteInfo = Demo;
 		};
+		683F524A1F78E0B10012EC7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68857E031F5D1D5C002E1647 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68857E0B1F5D1D5C002E1647;
+			remoteInfo = IPG;
+		};
+		683F52521F78E4590012EC7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68857E031F5D1D5C002E1647 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68857E0B1F5D1D5C002E1647;
+			remoteInfo = IPG;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		683F524C1F78E0B10012EC7F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				683F52491F78E0B10012EC7F /* IPG.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		683F52541F78E4590012EC7F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				683F52511F78E4590012EC7F /* IPG.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0AACF6CB5E83B626D7B7F187 /* Pods_IPGTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IPGTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA0F07DB66239E6786547032 /* Pods_Demo.framework in Frameworks */,
+				683F52481F78E0B10012EC7F /* IPG.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,7 +197,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2A0FB67A5F01E2951EE7895 /* Pods_IPG_Demo.framework in Frameworks */,
+				683F52331F78D6BE0012EC7F /* Pods_IPG_Demo.framework in Frameworks */,
+				683F52501F78E4590012EC7F /* IPG.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,10 +397,12 @@
 				68857E191F5D1DDA002E1647 /* Resources */,
 				FACB24BCDC808CB326342FFE /* [CP] Embed Pods Frameworks */,
 				7C86A6CC28448BE996BAC58E /* [CP] Copy Pods Resources */,
+				683F524C1F78E0B10012EC7F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				683F524B1F78E0B10012EC7F /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -372,10 +419,12 @@
 				68EDF7231F67A24900DD338A /* Resources */,
 				9D772ADDEDE0B086AE902348 /* [CP] Embed Pods Frameworks */,
 				0C52B6A766306B34821F9A76 /* [CP] Copy Pods Resources */,
+				683F52541F78E4590012EC7F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				683F52531F78E4590012EC7F /* PBXTargetDependency */,
 			);
 			name = "IPG Demo";
 			productName = "IPG Demo";
@@ -484,7 +533,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-IPG Demo/Pods-IPG Demo-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -744,6 +793,16 @@
 			target = 68857E1A1F5D1DDA002E1647 /* Demo */;
 			targetProxy = 6826A0771F5FD221006ECFC1 /* PBXContainerItemProxy */;
 		};
+		683F524B1F78E0B10012EC7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68857E0B1F5D1D5C002E1647 /* IPG */;
+			targetProxy = 683F524A1F78E0B10012EC7F /* PBXContainerItemProxy */;
+		};
+		683F52531F78E4590012EC7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68857E0B1F5D1D5C002E1647 /* IPG */;
+			targetProxy = 683F52521F78E4590012EC7F /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -919,6 +978,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -947,6 +1007,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -970,6 +1031,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2A663EEE4C835887CA199E89 /* Pods-Demo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -983,6 +1045,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EBF15342B731973C139E1C1D /* Pods-Demo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -996,6 +1059,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4643ECD854922CBD741111CB /* Pods-IPG Demo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
@@ -1013,6 +1077,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A91FBE4F905825D1129BC3EE /* Pods-IPG Demo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";

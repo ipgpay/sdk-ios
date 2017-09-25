@@ -24,6 +24,13 @@ extension Date {
     return date
   }
   
+  static func addMonth(_ value: Int, to date: Date) -> Date {
+    let calendar = Calendar.current
+    
+    let date = calendar.date(byAdding: .month, value: value, to: date)!
+    return date
+  }
+  
   static func parse(_ string: String, format: String = "yyyy-MM-dd") -> Date? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = format

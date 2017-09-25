@@ -40,9 +40,20 @@ class OneTimeTokenGeneratorTests: XCTestCase {
   }
   
   func testisValidExpiryDate() {
+    let date = Date()
+    let calendar = Calendar.current
+    let month = calendar.component(.month, from: date)
+    let year = calendar.component(.year, from: date) - 2000
+    
+    let dateNext = calendar.date(byAdding: .month, value: 1, to: date)!
+    let monthNext = calendar.component(.month, from: dateNext)
+    let yearNext = calendar.component(.year, from: dateNext) - 2000
+    
+    XCTAssert(ott.isValidExpiryDate(String(year), String(format: "%02x", month)) == true)
     XCTAssert(ott.isValidExpiryDate("37","11") == true)
     XCTAssert(ott.isValidExpiryDate("99","01") == true)
     
+    XCTAssert(ott.isValidExpiryDate(String(yearNext), String(format: "%02x", monthNext)) == false)
     XCTAssert(ott.isValidExpiryDate("9999","12") == false)
     XCTAssert(ott.isValidExpiryDate("2017","08") == false)
     XCTAssert(ott.isValidExpiryDate("ab","c") == false)
