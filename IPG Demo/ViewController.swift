@@ -178,6 +178,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     self.purchaseResultStackView.isHidden = true
     self.errorStackView.isHidden = true
     
+    self.hideKeyboardWhenTappedAround()
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -249,5 +250,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     self.totalLabel.text = "Total \(total)USD"
   }
   
+}
+
+extension UIViewController {
+  func hideKeyboardWhenTappedAround() {
+    let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+    tap.cancelsTouchesInView = false
+    view.addGestureRecognizer(tap)
+  }
+  
+  func dismissKeyboard() {
+    view.endEditing(true)
+  }
 }
 
