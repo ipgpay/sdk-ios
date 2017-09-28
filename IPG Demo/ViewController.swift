@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   let serviceAuthKey = "ZnHvGDpYJhkQ"
   let merchantServer: MerchantServer = MerchantServer("https://api-a2integ12-ipgpay.ipggroup.com/sdk/ipg-mobiledemo-server/index.php")
   let textFieldShouldReturnDelegate = TextFieldShouldReturnDelegate()
+  let textFieldNumberDelegate = TextFieldNumberDelegate()
   
   var cartList: [Product] = [Product]()
   var pickerDataSource = [
@@ -88,6 +89,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     if self.paymentEmailText.text == nil || self.paymentEmailText.text == "" {
       validateMessage += "Email should not be empty!\n"
+    } else if !isValidEmail(text: self.paymentEmailText.text!) {
+      validateMessage += "Email is invalid!\n"
     }
     
     if validateMessage != "" {
@@ -161,7 +164,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //init control
     self.cartTableView.dataSource = self
-    self.addQtyText.delegate = self
+    self.addQtyText.delegate = self.textFieldNumberDelegate
     self.addPriceText.delegate = self
     self.addNameText.delegate = self.textFieldShouldReturnDelegate
     
@@ -220,10 +223,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   }
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    let inverseSet = NSCharacterSet(charactersIn:"0123456789").inverted
-    let components = string.components(separatedBy: inverseSet)
-    let filtered = components.joined(separator: "")
-    return string == filtered
+    switch string {
+    case "0","1","2","3","4","5","6","7","8","9":
+      return true
+    case ".":
+      let str = self.addPriceText.text!
+      var decimalCount = 0
+      for character in str.characters {
+        if character == "." {
+          decimalCount += 1
+        }
+      }
+      
+      if decimalCount == 1 || (decimalCount == 0 && str == ""){
+        return false
+      } else {
+        return true
+      }
+    default:
+      if string.characters.count == 0 {
+        return true
+      }
+      return false
+    }
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -250,6 +272,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     self.totalLabel.text = "Total \(total)USD"
   }
   
+  func isValidEmail(text: String) -> Bool {
+    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+    
+    let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+    return emailTest.evaluate(with: text)
+  }
 }
 
 extension UIViewController {

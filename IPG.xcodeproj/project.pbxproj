@@ -31,6 +31,7 @@
 		68857E231F5D1DDA002E1647 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68857E211F5D1DDA002E1647 /* Main.storyboard */; };
 		68857E251F5D1DDA002E1647 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68857E241F5D1DDA002E1647 /* Assets.xcassets */; };
 		68857E281F5D1DDA002E1647 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68857E261F5D1DDA002E1647 /* LaunchScreen.storyboard */; };
+		68ED30301F7CDA2100A2C125 /* TextFieldNumberDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ED302F1F7CDA2100A2C125 /* TextFieldNumberDelegate.swift */; };
 		68EDF71E1F6774C900DD338A /* CapabilityResponseXMLParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EDF71D1F6774C900DD338A /* CapabilityResponseXMLParserDelegate.swift */; };
 		68EDF7201F677C9A00DD338A /* CapabilityLookupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EDF71F1F677C9A00DD338A /* CapabilityLookupTests.swift */; };
 		68EDF7281F67A24900DD338A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EDF7271F67A24900DD338A /* AppDelegate.swift */; };
@@ -138,6 +139,7 @@
 		68857E451F5D3D9D002E1647 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = "../../../Library/Developer/Xcode/DerivedData/IPG-abvlyebgidrcjzfnzbrzyalwhyop/Build/Products/Debug-iphonesimulator/AlamofireObjectMapper/AlamofireObjectMapper.framework"; sourceTree = "<group>"; };
 		68857E461F5D3D9D002E1647 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "../../../Library/Developer/Xcode/DerivedData/IPG-abvlyebgidrcjzfnzbrzyalwhyop/Build/Products/Debug-iphonesimulator/ObjectMapper/ObjectMapper.framework"; sourceTree = "<group>"; };
 		68857E8B1F5D4548002E1647 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		68ED302F1F7CDA2100A2C125 /* TextFieldNumberDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldNumberDelegate.swift; sourceTree = "<group>"; };
 		68EDF71D1F6774C900DD338A /* CapabilityResponseXMLParserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapabilityResponseXMLParserDelegate.swift; sourceTree = "<group>"; };
 		68EDF71F1F677C9A00DD338A /* CapabilityLookupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapabilityLookupTests.swift; sourceTree = "<group>"; };
 		68EDF7251F67A24900DD338A /* IPG Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IPG Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -286,6 +288,7 @@
 				6813EF951F6A620A00BC64F3 /* Product.swift */,
 				6828728E1F726ADD00CA49FE /* Purchase.swift */,
 				680221C31F7500F200A6D890 /* TextFieldShouldReturnDelegate.swift */,
+				68ED302F1F7CDA2100A2C125 /* TextFieldNumberDelegate.swift */,
 			);
 			path = "IPG Demo";
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				680221C41F7500F200A6D890 /* TextFieldShouldReturnDelegate.swift in Sources */,
 				6813EF961F6A620A00BC64F3 /* Product.swift in Sources */,
 				68EDF7281F67A24900DD338A /* AppDelegate.swift in Sources */,
+				68ED30301F7CDA2100A2C125 /* TextFieldNumberDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
