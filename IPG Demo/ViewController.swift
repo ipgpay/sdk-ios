@@ -160,7 +160,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     self.cartList.append(Product(name: "Product 1", qty: 2, price: 1.20))
     self.cartList.append(Product(name: "Product 2", qty: 3, price: 1.60))
     let total = self.getTotal()
-    self.totalLabel.text = "Total \(total)USD"
+    self.totalLabel.text = String(format: "Total USD %.2f", total)
     
     //init control
     self.cartTableView.dataSource = self
@@ -169,11 +169,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     self.addNameText.delegate = self.textFieldShouldReturnDelegate
     
     self.paymentCardNumberText.delegate = self.textFieldShouldReturnDelegate
+    self.paymentCardNumberText.keyboardType = .numberPad
     self.paymentCardholderNameText.delegate = self.textFieldShouldReturnDelegate
     self.paymentCVVText.delegate = self.textFieldShouldReturnDelegate
+    self.paymentCVVText.keyboardType = .numberPad
     self.paymentFirstNameText.delegate = self.textFieldShouldReturnDelegate
     self.paymentLastNameText.delegate = self.textFieldShouldReturnDelegate
     self.paymentEmailText.delegate = self.textFieldShouldReturnDelegate
+    self.paymentEmailText.keyboardType = .emailAddress
     
     self.expDatePickerView.dataSource = self
     self.expDatePickerView.delegate = self
@@ -192,7 +195,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let cell = self.cartTableView.dequeueReusableCell(withIdentifier: "prodCell")! as! ProductTableViewCell
     let dest = self.cartList[indexPath.row] as Product
     cell.prodLabel.text = dest.name
-    cell.priceLabel.text = String(dest.price)
+    cell.priceLabel.text = String(format: "%.2f", dest.price)
     cell.qtyLabel.text = String(dest.qty)
     return cell
   }
@@ -269,7 +272,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     self.addNameText.text = ""
     self.addQtyText.text = ""
     self.addPriceText.text = ""
-    self.totalLabel.text = "Total \(total)USD"
+    self.totalLabel.text = String(format: "Total USD %.2f", total)
   }
   
   func isValidEmail(text: String) -> Bool {
