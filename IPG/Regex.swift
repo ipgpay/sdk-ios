@@ -8,8 +8,11 @@
 
 import Foundation
 
-class Regex {
-  func test(for pattern: String, in text: String) -> Bool {
+public class Regex {
+  public init() {
+    
+  }
+  public func test(for pattern: String, in text: String) -> Bool {
     do {
       let regex = try NSRegularExpression(pattern: pattern)
       let nsString = text as NSString

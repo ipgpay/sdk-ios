@@ -9,7 +9,7 @@
 import UIKit
 import IPG
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
   
   let tokenServiceUrl = "https://payment.ipgholdings.net/service/token/create"
   let capabilityServiceUrl = "url"
@@ -29,7 +29,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   
   /// for cart list display and add
   @IBOutlet weak var addQtyText: UITextField!
- 
   @IBOutlet weak var addPriceText: UITextField!
   @IBOutlet weak var addNameText: UITextField!
   @IBOutlet weak var cartTableView: UITableView!
@@ -39,14 +38,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   @IBOutlet weak var purchaseResultStackView: UIStackView!
   @IBOutlet weak var orderId: UILabel!
   @IBOutlet weak var orderChargeAccount: UILabel!
-  @IBOutlet weak var orderPurchaseFrom: UILabel!
   @IBOutlet weak var orderPurchaseDate: UILabel!
   
   /// for payment input
+  @IBOutlet weak var paymentExpYearText: UITextField!
+  @IBOutlet weak var paymentExpMonthText: UITextField!
   @IBOutlet weak var paymentCVVText: UITextField!
-  @IBOutlet weak var expDatePickerView: UIPickerView!
-  @IBOutlet weak var paymentLastNameText: UITextField!
-  @IBOutlet weak var paymentFirstNameText: UITextField!
   @IBOutlet weak var paymentEmailText: UITextField!
   @IBOutlet weak var paymentCardholderNameText: UITextField!
   @IBOutlet weak var paymentCardNumberText: UITextField!
@@ -59,9 +56,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     if self.addQtyText.text == nil || self.addQtyText.text == "" {
       validateMessage += "Quantity should not be empty!\n"
+    } else if let qtyStr = self.addQtyText.text {
+      let qty = Int(qtyStr)!
+      if qty > 999 {
+        validateMessage += "Quantity max value is 999!\n"
+      }
     }
     if self.addPriceText.text == nil || self.addPriceText.text == "" {
       validateMessage += "Price should not be empty!\n"
+    } else if let priceStr = self.addPriceText.text {
+      let price = Double(priceStr)!
+      if price > 9999.99 {
+        validateMessage += "Price max value is 9999.99!\n"
+      }
     }
     
     if validateMessage != "" {
@@ -74,7 +81,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   }
   
   @IBAction func purchaseAction(_ sender: Any) {
-
+    let regex = Regex()
     //validate input
     var validateMessage = "";
     if self.paymentCardNumberText.text == nil || self.paymentCardNumberText.text == "" {
@@ -83,10 +90,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     if self.paymentCardholderNameText.text == nil || self.paymentCardholderNameText.text == "" {
       validateMessage += "Cardholder name should not be empty!\n"
     }
+    if self.paymentExpMonthText.text == nil || self.paymentExpMonthText.text == "" {
+      validateMessage += "Expiry month should not be empty!\n"
+    } else if let expMonth = self.paymentExpMonthText.text {
+      if !regex.test(for: "^(0[1-9]|1[012])$", in: expMonth) {
+        validateMessage += "Expiry month is invalid!\n"
+      }
+    }
+    if self.paymentExpYearText.text == nil || self.paymentExpYearText.text == "" {
+      validateMessage += "Expiry year should not be empty!\n"
+    } else if let expYear = self.paymentExpYearText.text {
+      if !regex.test(for: "^[0-9]{4}$", in: expYear) {
+        validateMessage += "Expiry year is invalid!\n"
+      }
+    }
     if self.paymentCVVText.text == nil || self.paymentCVVText.text == "" {
       validateMessage += "CVV should not be empty!\n"
     }
-    
     if self.paymentEmailText.text == nil || self.paymentEmailText.text == "" {
       validateMessage += "Email should not be empty!\n"
     } else if !isValidEmail(text: self.paymentEmailText.text!) {
@@ -103,8 +123,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let alert = UIAlertController(title: nil, message: "Loading...", preferredStyle: UIAlertControllerStyle.alert)
     self.present(alert, animated: true, completion: nil)
     
-    let month = pickerDataSource[0][self.expDatePickerView.selectedRow(inComponent: 0)]
-    let year = pickerDataSource[1][self.expDatePickerView.selectedRow(inComponent: 1)]
+    let month = paymentExpMonthText.text!
+    let year = paymentExpYearText.text!
     let yearLast2 = year.substring(from: year.index(year.startIndex, offsetBy: year.characters.count - 2))
     
     let options = Options(ccPan: self.paymentCardNumberText.text!, ccCvv: self.paymentCVVText.text!, ccExpyear: yearLast2, ccExpmonth: month)
@@ -118,7 +138,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
           if let orderId = detail.orderId {
             debugPrint(orderId)
             self.orderId.text = orderId
-            self.orderPurchaseFrom.text = "SHINE-MGR"
             self.orderPurchaseDate.text = detail.orderDatetime
             self.orderChargeAccount.text = detail.orderTotal
             self.purchaseResultStackView.isHidden = false
@@ -162,24 +181,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let total = self.getTotal()
     self.totalLabel.text = String(format: "Total USD %.2f", total)
     
-    //init control
+    /// init control
+    
+    /// for cart list display and add
     self.cartTableView.dataSource = self
     self.addQtyText.delegate = self.textFieldNumberDelegate
+    self.addQtyText.keyboardType = .numberPad
     self.addPriceText.delegate = self
+    self.addPriceText.keyboardType = .decimalPad
     self.addNameText.delegate = self.textFieldShouldReturnDelegate
     
+    /// for payment input
     self.paymentCardNumberText.delegate = self.textFieldShouldReturnDelegate
     self.paymentCardNumberText.keyboardType = .numberPad
     self.paymentCardholderNameText.delegate = self.textFieldShouldReturnDelegate
+    self.paymentExpMonthText.delegate = self.textFieldShouldReturnDelegate
+    self.paymentExpMonthText.keyboardType = .numberPad
+    self.paymentExpYearText.delegate = self.textFieldShouldReturnDelegate
+    self.paymentExpYearText.keyboardType = .numberPad
     self.paymentCVVText.delegate = self.textFieldShouldReturnDelegate
     self.paymentCVVText.keyboardType = .numberPad
-    self.paymentFirstNameText.delegate = self.textFieldShouldReturnDelegate
-    self.paymentLastNameText.delegate = self.textFieldShouldReturnDelegate
     self.paymentEmailText.delegate = self.textFieldShouldReturnDelegate
     self.paymentEmailText.keyboardType = .emailAddress
-    
-    self.expDatePickerView.dataSource = self
-    self.expDatePickerView.delegate = self
     
     self.purchaseResultStackView.isHidden = true
     self.errorStackView.isHidden = true
@@ -198,31 +221,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     cell.priceLabel.text = String(format: "%.2f", dest.price)
     cell.qtyLabel.text = String(dest.qty)
     return cell
-  }
-  
-  func numberOfComponents(in pickerView: UIPickerView) -> Int {
-    return 2
-  }
-  
-  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return pickerDataSource[component].count
-  }
-  
-  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return pickerDataSource[component][row]
-  }
-  
-  func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-    var pickerLabel: UILabel? = (view as? UILabel)
-    if pickerLabel == nil {
-      pickerLabel = UILabel()
-      pickerLabel?.font = UIFont(name: "System 13.0", size: 13)
-      pickerLabel?.textAlignment = .center
-    }
-    pickerLabel?.text = pickerDataSource[component][row]
-    //pickerLabel?.textColor = UIColor.blue
-    
-    return pickerLabel!
   }
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
