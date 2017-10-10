@@ -16,6 +16,10 @@
 		682136281F8CA23D0060DDDD /* check-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 682136271F8CA23D0060DDDD /* check-circle.png */; };
 		6821362B1F8CA3550060DDDD /* cardSprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 682136291F8CA3550060DDDD /* cardSprites.png */; };
 		6821362C1F8CA3550060DDDD /* logo-template.png in Resources */ = {isa = PBXBuildFile; fileRef = 6821362A1F8CA3550060DDDD /* logo-template.png */; };
+		682136311F8CC9990060DDDD /* card-type-4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6821362D1F8CC9990060DDDD /* card-type-4.jpg */; };
+		682136321F8CC9990060DDDD /* card-type-3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6821362E1F8CC9990060DDDD /* card-type-3.jpg */; };
+		682136331F8CC9990060DDDD /* card-type-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6821362F1F8CC9990060DDDD /* card-type-1.jpg */; };
+		682136341F8CC9990060DDDD /* card-type-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 682136301F8CC9990060DDDD /* card-type-2.jpg */; };
 		682410A51F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682410A41F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift */; };
 		682410A71F5E4B2A00A5A610 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682410A61F5E4B2A00A5A610 /* ErrorCode.swift */; };
 		682410A91F5E91EF00A5A610 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682410A81F5E91EF00A5A610 /* Regex.swift */; };
@@ -123,6 +127,10 @@
 		682136271F8CA23D0060DDDD /* check-circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "check-circle.png"; path = "images/check-circle.png"; sourceTree = "<group>"; };
 		682136291F8CA3550060DDDD /* cardSprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cardSprites.png; path = images/cardSprites.png; sourceTree = "<group>"; };
 		6821362A1F8CA3550060DDDD /* logo-template.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo-template.png"; path = "images/logo-template.png"; sourceTree = "<group>"; };
+		6821362D1F8CC9990060DDDD /* card-type-4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "card-type-4.jpg"; path = "images/card-type-4.jpg"; sourceTree = "<group>"; };
+		6821362E1F8CC9990060DDDD /* card-type-3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "card-type-3.jpg"; path = "images/card-type-3.jpg"; sourceTree = "<group>"; };
+		6821362F1F8CC9990060DDDD /* card-type-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "card-type-1.jpg"; path = "images/card-type-1.jpg"; sourceTree = "<group>"; };
+		682136301F8CC9990060DDDD /* card-type-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "card-type-2.jpg"; path = "images/card-type-2.jpg"; sourceTree = "<group>"; };
 		682410A41F5E4A0E00A5A610 /* OneTimeTokenGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeTokenGenerator.swift; sourceTree = "<group>"; };
 		682410A61F5E4B2A00A5A610 /* ErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
 		682410A81F5E91EF00A5A610 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
@@ -302,6 +310,10 @@
 		68F313B91F6BA07C00EDB80D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				6821362D1F8CC9990060DDDD /* card-type-4.jpg */,
+				6821362E1F8CC9990060DDDD /* card-type-3.jpg */,
+				6821362F1F8CC9990060DDDD /* card-type-1.jpg */,
+				682136301F8CC9990060DDDD /* card-type-2.jpg */,
 				682136291F8CA3550060DDDD /* cardSprites.png */,
 				6821362A1F8CA3550060DDDD /* logo-template.png */,
 				682136271F8CA23D0060DDDD /* check-circle.png */,
@@ -530,8 +542,12 @@
 				68EDF72F1F67A24900DD338A /* Assets.xcassets in Resources */,
 				68F313C01F6BA10300EDB80D /* credit-card-alt.png in Resources */,
 				6821362C1F8CA3550060DDDD /* logo-template.png in Resources */,
+				682136331F8CC9990060DDDD /* card-type-1.jpg in Resources */,
+				682136341F8CC9990060DDDD /* card-type-2.jpg in Resources */,
 				68EDF72D1F67A24900DD338A /* Main.storyboard in Resources */,
 				682136261F8C9D6E0060DDDD /* user.png in Resources */,
+				682136321F8CC9990060DDDD /* card-type-3.jpg in Resources */,
+				682136311F8CC9990060DDDD /* card-type-4.jpg in Resources */,
 				68F313C11F6BA10300EDB80D /* shopping-cart.png in Resources */,
 				681CACA21F70B0D9007E78EA /* cart-plus.png in Resources */,
 				6821362B1F8CA3550060DDDD /* cardSprites.png in Resources */,

@@ -313,17 +313,35 @@
                                             <constraint firstAttribute="height" constant="24" id="gLm-Bu-1ea"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bG-vX-SJ5">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="1bG-vX-SJ5">
                                         <rect key="frame" x="0.0" y="247.5" width="363" height="20"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardSprites.png" translatesAutoresizingMaskIntoConstraints="NO" id="RG4-N4-8RP">
-                                                <rect key="frame" x="0.0" y="0.0" width="256" height="20"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card-type-1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="RG4-N4-8RP">
+                                                <rect key="frame" x="0.0" y="0.0" width="32" height="20"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="256" id="Sx5-nN-jvb"/>
+                                                    <constraint firstAttribute="width" constant="32" id="Sx5-nN-jvb"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card-type-2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="E7a-Ii-AMg">
+                                                <rect key="frame" x="34" y="0.0" width="32" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="32" id="k6S-VA-bO0"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card-type-3.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="CDy-bO-PH0">
+                                                <rect key="frame" x="68" y="0.0" width="32" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="32" id="abe-ev-VBF"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card-type-4.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="x3P-Fi-K4B">
+                                                <rect key="frame" x="102" y="0.0" width="32" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="32" id="ZZo-eR-NhD"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xx-uC-Zwc">
-                                                <rect key="frame" x="256" y="0.0" width="107" height="20"/>
+                                                <rect key="frame" x="136" y="0.0" width="227" height="20"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                         </subviews>
@@ -726,7 +744,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cardSprites.png" width="256" height="20"/>
+        <image name="card-type-1.jpg" width="32" height="20"/>
+        <image name="card-type-2.jpg" width="32" height="20"/>
+        <image name="card-type-3.jpg" width="32" height="20"/>
+        <image name="card-type-4.jpg" width="32" height="20"/>
         <image name="cart-plus.png" width="286" height="286"/>
         <image name="check-circle.png" width="286" height="286"/>
         <image name="credit-card-alt.png" width="286" height="286"/>
