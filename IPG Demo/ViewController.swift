@@ -19,9 +19,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   let textFieldNumberDelegate = TextFieldNumberDelegate()
   
   var cartList: [Product] = [Product]()
-  var pickerDataSource = [
-    ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
-    ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027"]]
   
   /// show error
   @IBOutlet weak var errorStackView: UIStackView!
@@ -44,9 +41,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   @IBOutlet weak var paymentExpYearText: UITextField!
   @IBOutlet weak var paymentExpMonthText: UITextField!
   @IBOutlet weak var paymentCVVText: UITextField!
-  @IBOutlet weak var paymentEmailText: UITextField!
   @IBOutlet weak var paymentCardholderNameText: UITextField!
   @IBOutlet weak var paymentCardNumberText: UITextField!
+  
+  /// for customer details
+  @IBOutlet weak var paymentEmailText: UITextField!
+  @IBOutlet weak var lastNameText: UITextField!
+  @IBOutlet weak var firstNameText: UITextField!
+  
+  @IBOutlet weak var resetFormBtn: UIButton!
   
   @IBAction func addProductAction(_ sender: Any) {
     
@@ -78,6 +81,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     } else {
       addProduct(productName: self.addNameText.text!, quantity: Int(self.addQtyText.text!)!, price: Double(self.addPriceText.text!)!)
     }
+  }
+  
+  @IBAction func resetFormAction(_ sender: Any) {
+    self.addQtyText.text = ""
+    self.addPriceText.text = ""
+    self.addNameText.text = ""
+    self.cartList.removeAll()
+    self.totalLabel.text = String(format: "Total: USD %.2f", 0.00)
+    self.cartTableView.reloadData()
+    
+    self.paymentExpYearText.text = ""
+    self.paymentExpMonthText.text = ""
+    self.paymentCVVText.text = ""
+    self.paymentCardholderNameText.text = ""
+    self.paymentCardNumberText.text = ""
+    
+    self.paymentEmailText.text = ""
+    self.lastNameText.text = ""
+    self.firstNameText.text = ""
   }
   
   @IBAction func purchaseAction(_ sender: Any) {
@@ -179,7 +201,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     self.cartList.append(Product(name: "Product 1", qty: 2, price: 1.20))
     self.cartList.append(Product(name: "Product 2", qty: 3, price: 1.60))
     let total = self.getTotal()
-    self.totalLabel.text = String(format: "Total USD %.2f", total)
+    self.totalLabel.text = String(format: "Total: USD %.2f", total)
     
     /// init control
     
@@ -208,6 +230,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     self.errorStackView.isHidden = true
     
     self.hideKeyboardWhenTappedAround()
+    
+    let attributes : [String: Any] = [
+      NSFontAttributeName : UIFont.systemFont(ofSize: 13),
+      NSForegroundColorAttributeName : UIColor.black,
+      NSUnderlineStyleAttributeName : NSUnderlineStyle.styleSingle.rawValue]
+    let attributeString = NSMutableAttributedString(string: "Reset Form", attributes: attributes)
+    self.resetFormBtn.setAttributedTitle(attributeString, for: .normal)
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -270,7 +299,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     self.addNameText.text = ""
     self.addQtyText.text = ""
     self.addPriceText.text = ""
-    self.totalLabel.text = String(format: "Total USD %.2f", total)
+    self.totalLabel.text = String(format: "Total: USD %.2f", total)
   }
   
   func isValidEmail(text: String) -> Bool {
