@@ -84,22 +84,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   }
   
   @IBAction func resetFormAction(_ sender: Any) {
-    self.addQtyText.text = ""
-    self.addPriceText.text = ""
-    self.addNameText.text = ""
-    self.cartList.removeAll()
-    self.totalLabel.text = String(format: "Total: USD %.2f", 0.00)
-    self.cartTableView.reloadData()
+    let alertController = UIAlertController(title: "Warning", message: "Are you sure you want to reset?", preferredStyle: UIAlertControllerStyle.alert)
+    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+    alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: {(alert: UIAlertAction!) in
+      self.addQtyText.text = ""
+      self.addPriceText.text = ""
+      self.addNameText.text = ""
+      self.cartList.removeAll()
+      self.totalLabel.text = String(format: "Total: USD %.2f", 0.00)
+      self.cartTableView.reloadData()
+      
+      self.paymentExpYearText.text = ""
+      self.paymentExpMonthText.text = ""
+      self.paymentCVVText.text = ""
+      self.paymentCardholderNameText.text = ""
+      self.paymentCardNumberText.text = ""
+      
+      self.paymentEmailText.text = ""
+      self.lastNameText.text = ""
+      self.firstNameText.text = ""
+      
+      self.purchaseResultStackView.isHidden = true
+      self.errorStackView.isHidden = true
+    }))
     
-    self.paymentExpYearText.text = ""
-    self.paymentExpMonthText.text = ""
-    self.paymentCVVText.text = ""
-    self.paymentCardholderNameText.text = ""
-    self.paymentCardNumberText.text = ""
-    
-    self.paymentEmailText.text = ""
-    self.lastNameText.text = ""
-    self.firstNameText.text = ""
+    self.present(alertController, animated: true, completion: nil)
   }
   
   @IBAction func purchaseAction(_ sender: Any) {
