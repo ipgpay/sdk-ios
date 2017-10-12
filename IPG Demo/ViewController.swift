@@ -48,8 +48,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   @IBOutlet weak var paymentEmailText: UITextField!
   @IBOutlet weak var lastNameText: UITextField!
   @IBOutlet weak var firstNameText: UITextField!
-  
   @IBOutlet weak var resetFormBtn: UIButton!
+  
+  @IBOutlet weak var cartTableViewHeight: NSLayoutConstraint!
   
   @IBAction func addProductAction(_ sender: Any) {
     
@@ -246,6 +247,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
       NSUnderlineStyleAttributeName : NSUnderlineStyle.styleSingle.rawValue]
     let attributeString = NSMutableAttributedString(string: "Reset Form", attributes: attributes)
     self.resetFormBtn.setAttributedTitle(attributeString, for: .normal)
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.cartTableView.reloadData()
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    let height = min(self.view.bounds.size.height, cartTableView.contentSize.height)
+    self.cartTableViewHeight.constant = height
+    self.view.layoutIfNeeded()
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
