@@ -171,7 +171,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             debugPrint(orderId)
             self.orderId.text = orderId
             self.orderPurchaseDate.text = detail.orderDatetime
-            self.orderChargeAccount.text = detail.orderTotal
+            self.orderChargeAccount.text = "USD $" + detail.orderTotal!
             self.purchaseResultStackView.isHidden = false
             self.errorStackView.isHidden = true
             self.errorLabel.text = ""
