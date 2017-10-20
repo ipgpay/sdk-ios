@@ -7,19 +7,14 @@
 //
 
 import XCTest
+import OHHTTPStubs
 @testable import IPG
 
 class OneTimeTokenGeneratorTests: XCTestCase {
   
-  let ott = OneTimeTokenGenerator("testkey","http://private-ed273e-ipg.apiary-mock.com/tokensuccess")
-  
-  let ottError = OneTimeTokenGenerator("testkey","http://private-ed273e-ipg.apiary-mock.com/tokenerror")
-  
-  let ottNotFound = OneTimeTokenGenerator("testkey","http://private-ed273e-ipg.apiary-mock.com/token404")
-  
-  let ottEmpty = OneTimeTokenGenerator("testkey","http://private-ed273e-ipg.apiary-mock.com/tokenempty")
-  
+  let testHost = "ott.test.ipg"
   let optionsSuccess = Options(ccPan: "4012888888881881", ccCvv: "318", ccExpyear: "29", ccExpmonth: "09")
+  let ott = OneTimeTokenGenerator("testkey", "http://ott.test.ipg")
   
   override func setUp() {
     super.setUp()
@@ -45,9 +40,20 @@ class OneTimeTokenGeneratorTests: XCTestCase {
   }
   
   func testisValidExpiryDate() {
+    let date = Date()
+    let calendar = Calendar.current
+    let month = calendar.component(.month, from: date)
+    let year = calendar.component(.year, from: date) - 2000
+    
+    let dateNext = calendar.date(byAdding: .month, value: 1, to: date)!
+    let monthNext = calendar.component(.month, from: dateNext)
+    let yearNext = calendar.component(.year, from: dateNext) - 2000
+    
+    XCTAssert(ott.isValidExpiryDate(String(year), String(format: "%02x", month)) == true)
     XCTAssert(ott.isValidExpiryDate("37","11") == true)
     XCTAssert(ott.isValidExpiryDate("99","01") == true)
     
+    XCTAssert(ott.isValidExpiryDate(String(yearNext), String(format: "%02x", monthNext)) == false)
     XCTAssert(ott.isValidExpiryDate("9999","12") == false)
     XCTAssert(ott.isValidExpiryDate("2017","08") == false)
     XCTAssert(ott.isValidExpiryDate("ab","c") == false)
@@ -65,8 +71,13 @@ class OneTimeTokenGeneratorTests: XCTestCase {
   }
   
   func testgetPayload_Success() {
-    let tempExpectation = expectation(description: "testgetPayload_Success")
     
+    let tempStub = stub(condition: isHost(self.testHost) && isMethodPOST()) { _ in
+      let obj = ["token":"test token"]
+      return OHHTTPStubsResponse(jsonObject: obj, statusCode: 200, headers: ["Content-Type":"application/json"])
+    }
+    
+    let tempExpectation = expectation(description: "testgetPayload_Success")
     ott.getPayload(optionsSuccess) { payload in
       XCTAssert(payload.payload?.range(of: "1test token") != nil)
       XCTAssert(payload.error == nil)
@@ -74,32 +85,43 @@ class OneTimeTokenGeneratorTests: XCTestCase {
       XCTAssert(payload.ccPanLast4 == "1881")
       tempExpectation.fulfill()
     }
+    waitForExpectations(timeout: 1)
     
-    waitForExpectations(timeout: 5)
+    OHHTTPStubs.removeStub(tempStub)
   }
   
   func testgetPayload_Error_commsNoResponse() {
-    let tempExpectation = expectation(description: "testgetPayload_Error_commsNoResponse")
+    let tempStub = stub(condition: isHost(self.testHost) && isMethodPOST()) { _ in
+      let stubPath = OHPathForFile("emptyresponse.json", type(of: self))
+      return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
+    }
     
-    ottEmpty.getPayload(optionsSuccess) { payload in
+    let tempExpectation = expectation(description: "testgetPayload_Error_commsNoResponse")
+    ott.getPayload(optionsSuccess) { payload in
       XCTAssert(payload.payload == nil)
       XCTAssert(payload.ccPanBin == nil)
       XCTAssert(payload.ccPanLast4 == nil)
       XCTAssert(payload.error != nil)
-
+      
       let exist = self.containError(payload.error, ErrorCode.commsNoResponse.rawValue)
       XCTAssert(exist)
-
+      
       tempExpectation.fulfill()
     }
     
-    waitForExpectations(timeout: 5)
+    waitForExpectations(timeout: 1)
+    
+    OHHTTPStubs.removeStub(tempStub)
   }
   
   func testgetPayload_Error_commsServerUnreachable () {
-    let tempExpectation = expectation(description: "testgetPayload_Error_commsServerUnreachable")
+    let tempStub = stub(condition: isHost(self.testHost) && isMethodPOST()) { _ in
+      let obj = [""]
+      return OHHTTPStubsResponse(jsonObject: obj, statusCode: 404, headers: nil)
+    }
     
-    ottNotFound.getPayload(optionsSuccess) { payload in
+    let tempExpectation = expectation(description: "testgetPayload_Error_commsServerUnreachable")
+    ott.getPayload(optionsSuccess) { payload in
       XCTAssert(payload.payload == nil)
       XCTAssert(payload.ccPanBin == nil)
       XCTAssert(payload.ccPanLast4 == nil)
@@ -110,14 +132,20 @@ class OneTimeTokenGeneratorTests: XCTestCase {
       
       tempExpectation.fulfill()
     }
+    waitForExpectations(timeout: 1)
     
-    waitForExpectations(timeout: 10)
+    OHHTTPStubs.removeStub(tempStub)
   }
   
   func testgetPayload_Error() {
-    let tempExpectation = expectation(description: "testgetPayload_Error")
+    let tempStub = stub(condition: isHost(self.testHost) && isMethodPOST()) { _ in
+      let obj = ["error": [["errorCode": "1", "errorMessage": "message 1"],["errorCode": "2", "errorMessage": "message 2"], ["errorCode": "3", "errorMessage": "message 3"], ["errorCode": "4", "errorMessage": "message 4"]]]
+      
+      return OHHTTPStubsResponse(jsonObject: obj, statusCode: 200, headers: ["Content-Type":"application/json"])
+    }
     
-    ottError.getPayload(optionsSuccess) { payload in
+    let tempExpectation = expectation(description: "testgetPayload_Error")
+    ott.getPayload(optionsSuccess) { payload in
       XCTAssert(payload.payload == nil)
       XCTAssert(payload.ccPanBin == nil)
       XCTAssert(payload.ccPanLast4 == nil)
@@ -130,9 +158,8 @@ class OneTimeTokenGeneratorTests: XCTestCase {
       
       tempExpectation.fulfill()
     }
+    waitForExpectations(timeout: 1)
     
-    waitForExpectations(timeout: 5)
+    OHHTTPStubs.removeStub(tempStub)
   }
-  
-  
 }

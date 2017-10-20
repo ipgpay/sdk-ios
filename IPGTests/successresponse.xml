@@ -1,0 +1,26 @@
+<Response>
+  <Methods>
+    <Currency code="AUD">
+      <PaymentMethod method="OTT">
+        <PaymentType>Amex</PaymentType>
+        <PaymentType>MasterCard</PaymentType>
+        <PaymentType>Visa</PaymentType>
+      </PaymentMethod>
+      <PaymentMethod method="ApplePay">
+        <PaymentType>Amex</PaymentType>
+      </PaymentMethod>
+    </Currency>
+    <Currency code="USD">
+      <PaymentMethod method="OTT">
+        <PaymentType>Amex</PaymentType>
+        <PaymentType>MasterCard</PaymentType>
+      </PaymentMethod>
+      <PaymentMethod method="ApplePay">
+        <PaymentType>Amex</PaymentType>
+      </PaymentMethod>
+      <PaymentMethod method="SomeOtherMethod">
+        <PaymentType>Amex</PaymentType>
+      </PaymentMethod>
+    </Currency>
+  </Methods>
+</Response>

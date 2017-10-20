@@ -18,6 +18,9 @@ public class CapabilityLookup {
     self.capabilityServiceUrl = capabilityServiceUrl.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
   }
   
+  /// Get capabilities
+  ///
+  /// - Parameter responseHandler: A callback function for the client to handle the response object.
   public func getCapabilities(_ responseHandler: @escaping ([Currency]) -> Void) {
     let url = self.capabilityServiceUrl + "/" + self.authKey
     Alamofire.request(url, method: .get, parameters: nil)
