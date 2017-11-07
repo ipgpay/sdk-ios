@@ -55,6 +55,7 @@
 		68F313C01F6BA10300EDB80D /* credit-card-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F313BE1F6BA10300EDB80D /* credit-card-alt.png */; };
 		68F313C11F6BA10300EDB80D /* shopping-cart.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F313BF1F6BA10300EDB80D /* shopping-cart.png */; };
 		AEC6CFBF5D0251643A93EDB2 /* Pods_IPGTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AACF6CB5E83B626D7B7F187 /* Pods_IPGTests.framework */; };
+		CC93F8DD1FB2668E00B3049A /* LICENCE in Resources */ = {isa = PBXBuildFile; fileRef = CC93F8DC1FB2668E00B3049A /* LICENCE */; };
 		FA0F07DB66239E6786547032 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C39436F4F2AB5FA8F581BE5 /* Pods_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -177,6 +178,7 @@
 		7C39436F4F2AB5FA8F581BE5 /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A91FBE4F905825D1129BC3EE /* Pods-IPG Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPG Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-IPG Demo/Pods-IPG Demo.release.xcconfig"; sourceTree = "<group>"; };
 		C8A7C9A482B08252E7E914B2 /* Pods-IPGTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPGTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IPGTests/Pods-IPGTests.release.xcconfig"; sourceTree = "<group>"; };
+		CC93F8DC1FB2668E00B3049A /* LICENCE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENCE; sourceTree = "<group>"; };
 		E105D02E255FE7148F669E20 /* Pods-IPG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPG.release.xcconfig"; path = "Pods/Target Support Files/Pods-IPG/Pods-IPG.release.xcconfig"; sourceTree = "<group>"; };
 		EBF15342B731973C139E1C1D /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		EEA2A645892DD04C61759857 /* Pods-IPG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPG.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IPG/Pods-IPG.debug.xcconfig"; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 		68857E021F5D1D5C002E1647 = {
 			isa = PBXGroup;
 			children = (
+				CC93F8DC1FB2668E00B3049A /* LICENCE */,
 				68857E0E1F5D1D5C002E1647 /* IPG */,
 				68857E1C1F5D1DDA002E1647 /* Demo */,
 				6826A06D1F5FCEE7006ECFC1 /* IPGTests */,
@@ -520,6 +523,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC93F8DD1FB2668E00B3049A /* LICENCE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
